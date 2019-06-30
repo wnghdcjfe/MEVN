@@ -1,0 +1,22 @@
+{
+  "name": "mevn-project",
+  "version": "1.0.0",
+  "description": "mevn-project code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wnghdcjfe/MEVN.git"
+  },
+  "keywords": [
+    "mevn"
+  ],
+  "author": "kundol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wnghdcjfe/MEVN/issues"
+  },
+  "homepage": "https://github.com/wnghdcjfe/MEVN#readme"
+}
