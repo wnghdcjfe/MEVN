@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/wnghdcjfe/MEVN/issues"
   },
-  "homepage": "https://github.com/wnghdcjfe/MEVN#readme"
+  "homepage": "https://github.com/wnghdcjfe/MEVN#readme",
+  "dependencies": {
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^5.6.5"
+  }
 }
