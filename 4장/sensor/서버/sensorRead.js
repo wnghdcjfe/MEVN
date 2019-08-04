@@ -1,5 +1,5 @@
 const csvFilePath = './data/20190802_강동구.csv' 
-const csv=require('csvtojson') 
+const csv         = require('csvtojson') 
 module.exports = () => {
     return {
         async readCSV() {

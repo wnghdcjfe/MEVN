@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const sensorSchema = new Schema({
 	cnt: Number,
-	id: String,
+	id: Number,
     time: Date, 
     temp: Number, 
     wv: Number, 
