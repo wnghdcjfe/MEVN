@@ -16,7 +16,6 @@
       draw() { 
         const koreaMap = require('../assets/skorea-provinces-2018-topo-simple.json');
         const _map = topojson.feature(koreaMap, koreaMap.objects.skorea_provinces_2018_geo); 
-        const center = d3.geoCentroid(_map);
 
         const width = 600;
         const height = 1000;
