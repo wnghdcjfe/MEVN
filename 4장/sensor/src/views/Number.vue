@@ -5,8 +5,8 @@
   </div>
 </template>
 
-<script>
-  import * as d3 from 'd3';   
+<script>import ioClient from 'socket.io-client' 
+  import * as d3 from 'd3';    
   export default {
     name: 'HelloWorld3',
     data() {
@@ -14,7 +14,9 @@
       }
     },
     mounted() {
-      this.showCircle();
+      this.showCircle(); 
+      var socket = ioClient('http://127.0.0.1:12010');  
+console.log(socket)
     },
     methods: {
       showCircle() {  
@@ -37,7 +39,7 @@
         const pieGenerator = d3.pie().sort(null)
         const background = group.append("path")
           .data(pieGenerator([1])) 
-          .attr("class", (d, i) =>"backColor") 
+          .attr("class", "backColor") 
           .attr("d", arc)
 
         const foreground = group.append("path")

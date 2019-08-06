@@ -1,9 +1,7 @@
-import * as types from './mutation-types';
-import * as state from './state.js'; 
-
-console.log(state)
-export default {
-    [types.CHANGE_SENSOR_CHART] (state) {
+import * as types from './mutations-type';
+import state from './state';   
+  export default {
+    [types.CHANGE_SENSOR_CHART](state, payload) {
         state.sensors = [];  
     }
-  }
+} 

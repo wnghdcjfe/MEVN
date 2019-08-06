@@ -1,20 +1,22 @@
 const express = require('express')
 const app     = express()
+const cors    = require('cors')
 const http    = require("http").createServer(app)
-const io      = require('socket.io')(http); 
+const io      = require('socket.io')(http);  
+
 const sensorController = require('./controller/sensor'); 
 const path    = require('path')  
 const _path   = path.join(__dirname, './dist')  
-const PORT    = 12027 
-const mongoose = require('mongoose');  
-const mongoDB  = 'mongodb://127.0.0.1/my_database';
-//계정 설정 MongoDB 계정 보안 설정 이야기
-// mongoose.connect('mongodb://아이디:비밀번호@호스트:포트/admin', { dbName: '사용할 데이터베이스' });
-//
-
+const PORT    = 12010 
+const mongoose = require('mongoose');   
+//계정 설정 MongoDB 계정 보안 설정 이야기 
+// const mongodbURL = 'mongodb://root:kundol12010@localhost:27017/admin';
+// mongoose.connect(mongodbURL, {useNewUrlParser: true});  
 const main = async ()=>{
   //app 객체 설정 
   app.use('/', express.static(_path)) 
+  conso
+  app.use(cors())
   //MongoDB Connection
   // const isDBconnection = await mongoose.connect(mongoDB, { useNewUrlParser: true });
   // console.log(isDBconnection); 
@@ -34,10 +36,10 @@ const main = async ()=>{
       //clients.splice(clients.indexOf(io.nickname),1); 
     }); 
   }); 
-  const jsonArray = await require('./sensorRead.js')().readCSV();
-  setInterval(() => {   
-    await sensorController.emitSensorAndSave(io, jsonArray); 
-  }, 10 * 1000);   
+  // const jsonArray = await require('./sensorRead.js')().readCSV();
+  // setInterval(() => {   
+  //   await sensorController.emitSensorAndSave(io, jsonArray); 
+  // }, 10 * 1000);   
 
   app.listen(PORT, ()=> console.log(`센서서버 구동..! : 시작 http://127.0.0.1:${PORT}`));
 }
