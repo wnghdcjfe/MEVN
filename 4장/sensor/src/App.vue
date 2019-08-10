@@ -39,6 +39,11 @@ export default {
 </script>
 
 <style>
+
+  @font-face {
+    font-family: 오버워치;
+    src: url(./assets/koverwatch.woff2);
+  } 
   .logo {
     float: left;
   }

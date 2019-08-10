@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="Number">
     <h2>커져가는 원속의 숫자 + 게이지</h2>
     <svg></svg> 
   </div>
@@ -14,9 +14,7 @@
       }
     },
     mounted() {
-      this.showCircle(); 
-      var socket = ioClient('http://127.0.0.1:12010');  
-      console.log(socket)
+      this.showCircle();  
     },
     methods: {
       showCircle() {  
@@ -68,26 +66,22 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  path.backColor {
+  .Number path.backColor {
     fill: #ff9c00;
   }
-  path.frontColor0 {
+  .Number path.frontColor0 {
     fill: #545f73;
   }
-  path.frontColor1 {
+  .Number path.frontColor1 {
     fill: #ff9c00;
   }  
 
-  text {
+  .Number text {
     font-size: 7em;
     font-weight: 400;
     line-height: 16em;
     fill: black;
     font-family:오버워치;
-  }
-  @font-face {
-    font-family: 오버워치;
-    src: url(../assets/koverwatch.woff2);
   } 
 
 </style>

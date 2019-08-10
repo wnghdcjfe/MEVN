@@ -90,7 +90,7 @@
     margin: 0 auto;
   }
 
-  path {
+  .Map path {
     fill: #ed8b70;
     stroke: #de6a6c;
   }

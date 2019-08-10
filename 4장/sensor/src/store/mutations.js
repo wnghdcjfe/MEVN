@@ -1,5 +1,4 @@
-import * as types from './mutations-type';
-import state from './state';   
+import * as types from './mutations-type'; 
   export default {
     [types.CHANGE_SENSOR_CHART](state, payload) {
         console.log(payload)
@@ -8,5 +7,6 @@ import state from './state';
           state.sensors.unshift(); 
           state.sensors.push(payload);
         }
+        console.log(state.sensors)
     }
 } 

@@ -1,11 +1,9 @@
 <template>
   <div> 
-    풍속
-    <Chart _key=1 color = "red"></Chart>
-    온도
-    <Chart _key=2 color = "blue"></Chart> 
-    습도
-    <Chart _key=3 color = "green"></Chart>  
+    <div v-for="c in charList">
+      {{c.value}}
+      <Chart :_key="c.key" :color = "c.value"></Chart>
+    </div> 
   </div>
 </template>
 
@@ -17,6 +15,19 @@ export default {
   name: 'SensorChart',
   components: {
     Chart
-  }
+  }, 
+    data() {
+      return { 
+        charList : [
+          {"key" : 1, "color" : "red", "value": "wv"},
+          {"key" : 2, "color" : "blue", "value": "temp"},
+          {"key" : 3, "color" : "green", "value": "humi"}
+        ]
+      }
+    },
+    mounted() { 
+    },
+    methods: { 
+    }  
 }
 </script>
