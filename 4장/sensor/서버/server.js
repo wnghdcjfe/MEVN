@@ -2,46 +2,48 @@ const express = require('express')
 const app     = express()
 const cors    = require('cors')
 const http    = require("http").createServer(app)
-const io      = require('socket.io')(http);  
-
-const sensorController = require('./controller/sensor'); 
+const io      = require('socket.io')(http)
+const util    = require('./util')()
+const sensorController = require('./controller/sensor')
 const path    = require('path')  
-const _path   = path.join(__dirname, './dist')  
+const _path   = path.join(__dirname, '..', './dist')  
 const PORT    = 12010 
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose')
 //계정 설정 MongoDB 계정 보안 설정 이야기 
-// const mongodbURL = 'mongodb://root:kundol12010@localhost:27017/admin';
-// mongoose.connect(mongodbURL, {useNewUrlParser: true});  
-const main = async ()=>{
+const USER = 'dabin'
+const PWD = 'dabin12010'
+const HOST = 'localhost:27017'
+const DB = 'sensor'
+const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`
+mongoose.connect(mongodbURL, {useNewUrlParser: true}); 
+mongoose.set('useFindAndModify', false);
+let userList = [];
+const main = async()=>{
   //app 객체 설정 
-  app.use('/', express.static(_path)) 
-  conso
-  app.use(cors())
-  //MongoDB Connection
-  // const isDBconnection = await mongoose.connect(mongoDB, { useNewUrlParser: true });
-  // console.log(isDBconnection); 
-//   mongoose.connect(mongoDB, { useNewUrlParser: true })
-// .then(() =>  console.log('connection succesful'))
-// .catch((err) => console.error(err));
-  //io 객체 설정
-  io.on('connection', (socket, b) =>{
-    //socket client 이벤트 연결 
-    //두번째 인자에는 뭐가 있을지 궁금
-    console.log(b)
-    socket.on('chat message', (msg) =>{
+  app.use('/', express.static(_path))  
+  app.use(cors()) 
+  mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err)) 
+  //io 객체 설정 
+  io.on('connection', (socket) =>{  
+    console.log(`User connected :: ${util._date()} ID : ${socket.id}`)   
+    userList.push(socket.id) 
+    socket.on('sensors', (msg) =>{
       console.log('message: ' + msg);
     }); 
-    socket.on('disconnect', (client) => {
-      //client 빼기 
-      //clients.splice(clients.indexOf(io.nickname),1); 
-    }); 
+    socket.on('disconnect', () => {  
+      console.log(`User disconnected :: ${util._date()} ID : ${socket.id}`)  
+      userList.splice(userList.indexOf(socket.id),1); 
+    });  
   }); 
-  // const jsonArray = await require('./sensorRead.js')().readCSV();
-  // setInterval(() => {   
-  //   await sensorController.emitSensorAndSave(io, jsonArray); 
-  // }, 10 * 1000);   
+  const jsonArray = await util.readCSV(); 
+  setInterval(async () => {   
+    const sensor = await sensorController.emitSensorAndSave(io, jsonArray); 
+    console.log(`Emit user Current Sensor And Save DB :: ${util._date()} ${JSON.stringify(sensor)}`) 
+  }, 10 * 1000);   
 
-  app.listen(PORT, ()=> console.log(`센서서버 구동..! : 시작 http://127.0.0.1:${PORT}`));
+  http.listen(PORT, ()=> console.log(`센서서버가 시작됩니다. http://127.0.0.1:${PORT} :: ${util._date()}`));
 }
 
 main();  

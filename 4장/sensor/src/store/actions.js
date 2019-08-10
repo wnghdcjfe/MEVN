@@ -1,11 +1,8 @@
-
-import ioClient from 'socket.io-client'  
-ioClient('http://127.0.0.1')
 export default {
-    initConnection : () =>{
+    initGetSensor({
+        commit
+    }, socket) { 
+        socket.on("sensor", data => commit("CHANGE_SENSOR_CHART", data))
         // socket connection
-    }, 
-    getSensor : () =>{
-
-    } 
-  };
+    }
+};

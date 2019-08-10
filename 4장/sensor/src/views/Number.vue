@@ -16,7 +16,7 @@
     mounted() {
       this.showCircle(); 
       var socket = ioClient('http://127.0.0.1:12010');  
-console.log(socket)
+      console.log(socket)
     },
     methods: {
       showCircle() {  

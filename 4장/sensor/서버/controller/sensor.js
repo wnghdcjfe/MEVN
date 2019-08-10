@@ -58,9 +58,9 @@ exports.emitSensorAndSave = (io, jsonArray)=>{
     return new Promise((resolve, reject) =>{
         const data = setNextData(jsonArray) 
         //const data = setNextDataIterator(jsonArray) 
-        io.emit(data); 
+        io.emit("sensor", data); 
         save(data); 
-        resolve(1)
+        resolve(data)
     }) 
 } 
    
