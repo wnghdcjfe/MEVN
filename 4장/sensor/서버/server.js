@@ -38,6 +38,7 @@ const main = async()=>{
     });  
   }); 
   const jsonArray = await util.readCSV(); 
+  console.log(jsonArray)
   setInterval(async () => {   
     const sensor = await sensorController.emitSensorAndSave(io, jsonArray); 
     console.log(`Emit user Current Sensor And Save DB :: ${util._date()} ${JSON.stringify(sensor)}`) 

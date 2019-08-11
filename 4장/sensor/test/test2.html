@@ -1,73 +1,30 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<head>
+  <title>Time scale</title>
+</head>
+
 <style>
-  /* set the CSS */
-
-  .line {
-    fill: none;
-    /*stroke: #aaa;
-        stroke: #43484c;
-        stroke: #405275;
-        stroke: rgba(40, 53, 79, .95);
-        stroke: #161719;
-        stroke: #f99e1a;*/
-    stroke: #f89e35;
-    stroke-width: 2px;
-  }
-
-  .line2 {
-    fill: none;
-    stroke: #aaa;
-    stroke-width: 2px;
-  }
-
-  .line3 {
-    fill: none;
-    stroke: #405275;
-    stroke-width: 2px;
-  }
-
-  .line3-text {
-    fill: #405275;
-    stroke: #405275;
-  }
-
-  .line2-text {
-    fill: #aaa;
-    stroke: #aaa;
-  }
-
-  .line-text {
-    fill: #f89e35;
-    stroke: #f89e35;
-  }
-
-  div.tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #f99e1a;
-    border: 0px;
-    border-radius: 8px;
-  }
-
-  .tooltip p {
-    margin: 0;
-    padding: 0;
-  }
-
-  circle {
-    fill: rgba(40, 53, 79, .95);
-  }
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 10px;
+  color: #333;
+}
+text {
+	fill: black;
+	text-anchor: middle;
+}
 </style>
 
 <body>
-  <!-- load the d3.js library -->
-  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <svg width="800" height="80">
+  	<g id="wrapper" transform="translate(40, 40)">
+  	</g>
+  </svg>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
   <script>
-    const data = [{
+       const data = [{
         id: '402',
         time: '2019-08-02 00:01',
         temp: '26.2',
@@ -298,75 +255,35 @@
         wv: '0',
         humi: '87.6'
       }
-    ]
-    // set the dimensions and margins of the graph
-    var margin = {
-        top: 20,
-        right: 20,
-        bottom: 30,
-        left: 50
-      },
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+    ] 
+    console.log(new Date(data[0].time))
 
-    // set the ranges
-    var x = d3.scaleTime().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
-    const set_line_value = key => d3.line().x(d => x(d.time)).y(d => y(d.temp))
+var timeScale = d3.scaleTime() 
+  .domain(d3.extent(data, d => new Date(d.time)))
+	.range([0, 700]);  
+d3.select('#wrapper')
+	.selectAll('circle')
+	.data(data)
+	.enter()
+	.append('circle')
+	.attr('r', 2)
+	.attr('cy', 8)
+	.attr('cx', function(d) {
+		return timeScale(d);
+	});
 
-    
+d3.select('#wrapper')
+	.selectAll('text')
+	.data(data)
+	.enter()
+	.append('text')
+	.attr('x', function(d) {
+		return timeScale(d);
+	})
+	.text(function(d) {
+		return d.toDateString();
+	});
 
-    const div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
-    var svg = d3.select("body").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
- 
-
-    x.domain(d3.extent(data, d => new Date(d.time)));
-    y.domain([0, d3.max(data, d => d.wv)]); 
-    const _l = set_line_value("temp")
-    console.log(_l)
-    svg.append("path")
-      .data([data])
-      .attr("d", _l) 
-    // var fixeddot = svg.selectAll("dot")
-    //   .data(data)
-    //   .enter().append("circle")
-    //   .attr("r", 5)
-
-
-    // var fixeddot = svg.selectAll("dot")
-    //   .data(data)
-    //   .enter().append("circle")
-    //   .attr("r", 5)
-
-    // fixeddot.attr("cx", function (d) {
-    //     return x(d.time);
-    //   })
-    //   .attr("cy", function (d) {
-    //     return y(d.temp);
-    //   })
-    //   .on("mouseover", function (d) {
-    //     div.transition()
-    //       .duration(200)
-    //       .style("opacity", .9);
-    //     div.html("<p>년도:" + d.time + "</p> <p>GNI:" + d.temp + "</p>")
-    //       .style("left", (d3.event.pageX) + "px")
-    //       .style("top", (d3.event.pageY - 28) + "px");
-    //   });
-
-    // add the X Axis
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-    // add the Y Axis
-    svg.append("g")
-      .call(d3.axisLeft(y)); 
   </script>
 </body>
+</html>
