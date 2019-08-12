@@ -37,7 +37,7 @@ const main = async()=>{
       userList.splice(userList.indexOf(socket.id),1); 
     });  
   }); 
-  const jsonArray = await util.readCSV(); 
+  const jsonArray = await util.readCSV();  
   console.log(jsonArray)
   setInterval(async () => {   
     const sensor = await sensorController.emitSensorAndSave(io, jsonArray); 
