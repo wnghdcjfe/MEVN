@@ -1,8 +1,8 @@
 <template>
   <div> 
     <div v-for="c in charList">
-      {{c.value}}
-      <Chart :_key="c.key" :color = "c.value"></Chart>
+      {{c.value}}  
+      <Chart :_key="c.value" :color = "c.value" :key="c.value"></Chart>
     </div> 
   </div>
 </template>
@@ -19,9 +19,12 @@ export default {
     data() {
       return { 
         charList : [
-          {"key" : 1, "color" : "red", "value": "wv"},
-          {"key" : 2, "color" : "blue", "value": "temp"},
-          {"key" : 3, "color" : "green", "value": "humi"}
+          // {"key" : 1, "color" : "red", "value": "wv"},
+          // {"key" : 2, "color" : "blue", "value": "temp"},
+          // {"key" : 3, "color" : "green", "value": "humi"}
+           {"color" : "red", "value": "temp"}, 
+           {"color" : "green", "value": "wv"}, 
+           {"color" : "blue", "value": "humi"}
         ]
       }
     },

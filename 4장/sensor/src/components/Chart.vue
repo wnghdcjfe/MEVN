@@ -1,344 +1,113 @@
 <template>
-  <div class="Chart">
-
+  <div :class="'Chart Chart-' + _key">  
   </div>
 </template>
 
 <script>
   import config from '../config'
-  import * as d3 from 'd3';
+  import * as d3 from 'd3' 
+  const margin_value = 1;
+  
   import {
     mapState
-  } from 'vuex'
-  const _data = [{
-      id: '402',
-      time: '2019-08-02 01:05',
-      temp: '25.8',
-      wv: '1.2',
-      humi: '89'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:06',
-      temp: '25.8',
-      wv: '.9',
-      humi: '88.9'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:07',
-      temp: '25.8',
-      wv: '.9',
-      humi: '89'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:08',
-      temp: '25.9',
-      wv: '.5',
-      humi: '88.9'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:09',
-      temp: '25.9',
-      wv: '.6',
-      humi: '88.8'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:10',
-      temp: '25.9',
-      wv: '.4',
-      humi: '88.7'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:11',
-      temp: '25.9',
-      wv: '.7',
-      humi: '88.6'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:12',
-      temp: '25.9',
-      wv: '.6',
-      humi: '88.7'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:13',
-      temp: '26',
-      wv: '.5',
-      humi: '88.6'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:14',
-      temp: '26',
-      wv: '.5',
-      humi: '88.4'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:15',
-      temp: '26',
-      wv: '.6',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:16',
-      temp: '26',
-      wv: '.6',
-      humi: '88.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:17',
-      temp: '26',
-      wv: '.3',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:18',
-      temp: '25.9',
-      wv: '0',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:19',
-      temp: '25.9',
-      wv: '0',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:20',
-      temp: '25.9',
-      wv: '0',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:21',
-      temp: '26',
-      wv: '0',
-      humi: '88.3'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:22',
-      temp: '26',
-      wv: '0',
-      humi: '88.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:23',
-      temp: '26',
-      wv: '0',
-      humi: '88.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:24',
-      temp: '26',
-      wv: '0',
-      humi: '88.1'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:25',
-      temp: '26',
-      wv: '0',
-      humi: '88.1'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:26',
-      temp: '26',
-      wv: '0',
-      humi: '88.1'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:27',
-      temp: '26',
-      wv: '0',
-      humi: '88.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:28',
-      temp: '26',
-      wv: '0',
-      humi: '88.1'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:29',
-      temp: '26',
-      wv: '0',
-      humi: '88.1'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:30',
-      temp: '25.9',
-      wv: '.1',
-      humi: '88.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:31',
-      temp: '25.8',
-      wv: '.9',
-      humi: '88.4'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:32',
-      temp: '25.7',
-      wv: '.8',
-      humi: '88.7'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:33',
-      temp: '25.7',
-      wv: '1.1',
-      humi: '89'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:34',
-      temp: '25.6',
-      wv: '.9',
-      humi: '89.2'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:35',
-      temp: '25.6',
-      wv: '1.3',
-      humi: '89.4'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:36',
-      temp: '25.6',
-      wv: '1.1',
-      humi: '89.5'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:37',
-      temp: '25.5',
-      wv: '1.2',
-      humi: '89.7'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:38',
-      temp: '25.5',
-      wv: '1.1',
-      humi: '89.8'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:39',
-      temp: '25.5',
-      wv: '1.3',
-      humi: '89.9'
-    },
-    {
-      id: '402',
-      time: '2019-08-02 01:40',
-      temp: '25.5',
-      wv: '1',
-      humi: '90.1'
-    }
-  ]
+  } from 'vuex' 
   export default {
     name: 'Chart',
     props: {
-      _key: Number,
+      _key: String,
       color: String
-    },
+    }, 
     data() {
-      return {
-        drawSensor: []
+      return { 
+        svg : "", 
+        xScale : "", 
+        yScale : "", 
+        xAxis : "", 
+        yAxis : "", 
+        line : ""
       }
     },
-    mounted() {
-      this.draw();
+    mounted() { 
+      this.setAreaAndScale(this._key);
+      let cnt = 0;  
+      this.$store.subscribe((mutation, state) => {
+        if(mutation.type === "CHANGE_SENSOR_CHART"){
+            if(!cnt)this.initDraw(this.sensors, this._key);
+            else this.draw(this.sensors, this._key);  
+            cnt = 1; 
+            console.log("CNt", cnt)
+        } 
+ 
+      })
     },
-    methods: {
-      draw() {
-        //if (this.sensors.length < 10) return; 
-        console.log(config)
-        const svg = d3.select(".Chart").append("svg")
+    methods: { 
+      setAreaAndScale(key){ 
+        this.svg = d3.select(`.Chart-${key}`).append("svg")
           .attr("width", config.chartWidth + config.margin.left + config.margin.right)
           .attr("height", config.chartHeight + config.margin.top + config.margin.bottom)
           .append("g")
-          .attr("transform", `translate(${config.margin.left},${config.margin.top})`);
-
-        const data = _data
-
+          .attr("transform", `translate(${config.margin.left},${config.margin.top})`)   
+        this.xScale = d3.scaleTime().range([0, config.chartWidth]) 
+        this.yScale = d3.scaleLinear().range([config.chartHeight, 0])  
+        
+        const timeFormat = d3.timeFormat("%H:%M")
+        this.xAxis = d3.axisBottom(this.xScale).tickFormat(timeFormat)
+        this.yAxis = d3.axisLeft(this.yScale)    
+        this.line = d3.line().x(d => this.xScale(d.time)).y(d => this.yScale(d[key])).curve(d3.curveMonotoneX)    
+        
+      },
+      initDraw(data, key){    
+        console.log(1)
+        //data는 string형태로 오기 때문에 여기서 new Date 객체로 바꿔주어야 한다. 
         data.forEach(function (d) {
           d.time = new Date(d.time)
         }); 
-
-        const xScale = d3.scaleTime().range([0, config.chartWidth]).domain(d3.extent(data, d => d.time));
-        const yScale = d3.scaleLinear().range([config.chartHeight, 0]).domain([0, d3.max(data, d => d.temp)]);
-
-        //스케일 설정
-        const line = key => d3.line().x(d => xScale(d.time)).y(d => yScale(d[key])).curve(d3.curveMonotoneX)
-        //도메인 설정    
-                svg.append("g")
+        //scale에는 extent또는 0부터 max까지 할 수있다. 
+        this.xScale.domain(d3.extent(data, d => d.time))
+        //yScale.domain([0, d3.max(data, d => d.temp)])  
+        const _min = d3.min(data, d => d[key])
+        const _max = d3.max(data, d => d[key]) 
+        this.yScale.domain([_min - margin_value, _max + margin_value])   
+        
+        //data를 통해 path를 그리는데 3가지 방법이 있다. 
+      // svg.append("path").datum(data).attr("d", line)
+      // svg.append("path").data([data]).attr("d", line) 
+        this.svg.append("path")
+          .attr("d", this.line(data)) 
+          .attr("class", "line")
+        this.svg.append("g")
           .attr("class", "x axis")
           .attr("transform", `translate(0,${config.chartHeight})`)
-          .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y-%m-%d")));
+          .call(this.xAxis);
 
-        svg.append("g")
+        this.svg.append("g")
           .attr("class", "y axis")
-          .call(d3.axisLeft(yScale));
+          .call(this.yAxis); 
+      }, 
+      //draw에서는 데이터 처리가 아닌 data를 통해서 차트틀 그리는 것에 대해 집중해야 한다. 
+      draw(data, key) {  
+        console.log(2)
+        data.forEach(function (d) {
+          d.time = new Date(d.time)
+        });  
+        
+        this.xScale.domain(d3.extent(data, d => d.time))
+        //yScale.domain([0, d3.max(data, d => d.temp)])  
+        const _min = d3.min(data, d => d[key])
+        const _max = d3.max(data, d => d[key]) 
+        this.yScale.domain([_min - margin_value, _max + margin_value])   
 
-        svg.append("path")
-          .data([data])
-          .attr("class", "temp")
-          .attr("d", line("temp"))
-          .attr("class", "line")
-        // add the Y Axis 
-
- 
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-          
-           var fixeddot = svg.selectAll("dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("r", 5) 
-            fixeddot.attr("cx", function (d) {
-                    return xScale(d.time);
-                })
-                .attr("cy", function (d) {
-                    return yScale(d.temp);
-                })
-                .on("mouseover", function (d) {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html("<p>툴팁</p>")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                });
-
+    // Select the section we want to apply our changes to  
+    var svg = d3.select(`.Chart-${key} svg`).transition(); 
+        svg.select(".line")   // change the line
+            .duration(750)
+            .attr("d", this.line(data));
+        svg.select(".x.axis") // change the x axis
+            .duration(750)
+            .call(this.xAxis);
+        svg.select(".y.axis") // change the y axis
+            .duration(750)
+            .call(this.yAxis);  
       }
     },
     computed: {

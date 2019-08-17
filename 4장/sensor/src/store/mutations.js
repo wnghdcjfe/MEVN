@@ -1,12 +1,11 @@
 import * as types from './mutations-type'; 
   export default {
-    [types.CHANGE_SENSOR_CHART](state, payload) {
-        console.log(payload)
-        if(state.sensors.length != 10) state.sensors.push(payload);
-        else  {
-          state.sensors.unshift(); 
+    [types.CHANGE_SENSOR_CHART](state, payload) {    
+        if(!state.sensors.length){ 
+          state.sensors = payload; 
+        }else {
+          state.sensors.shift(); 
           state.sensors.push(payload);
-        }
-        console.log(state.sensors)
+        } 
     }
 } 

@@ -1,5 +1,6 @@
 const Sensor = require('../models/sensor.js'); 
-const _ = require("fxjs/Strict"); 
+const _ = require("fxjs/Strict");  
+const start_CNT= 10; 
 const save = async(data)=> {
     const ret = await Sensor.findOneAndUpdate({
         "cnt" : {
@@ -16,7 +17,7 @@ const save = async(data)=> {
     return ret;  
 };
 // 전역변수로 증가시키는 setNextData
-let cnt = 0;   
+let cnt = start_CNT;   
 const setType = data =>{
     for(let key in data){
         if(key == 'time')data[key] = new Date(data[key])
@@ -34,7 +35,7 @@ const setNextData = (jsonArray) =>{
 
 // 이터레이터로도 만들 수 있다. 
 function *setCntIterator() {  
-    let cnt = 0; 
+    let cnt = start_CNT;  
     while (true) {
         yield cnt;
         cnt = (cnt + 1);  
@@ -44,10 +45,8 @@ function *setCntIterator() {
 const iterator = setCntIterator(); 
 const setNextDataIterator = (jsonArray) =>{
     const l = jsonArray.length;      
-    const cnt = _.go(
-        iterator, 
-        _.take(1));
-    let data = jsonArray[cnt % l]; 
+    const cnt = iterator.next().value;  
+    let data = jsonArray[cnt % l];  
     data = {cnt : cnt, ...setType(data)};
     return data;    
 }
@@ -56,10 +55,20 @@ const setNextDataIterator = (jsonArray) =>{
 //testModule
 exports.emitSensorAndSave = (io, jsonArray)=>{
     return new Promise((resolve, reject) =>{
-        const data = setNextData(jsonArray) 
-        //const data = setNextDataIterator(jsonArray) 
+        //const data = setNextData(jsonArray) 
+        const data = setNextDataIterator(jsonArray)  
         io.emit("sensor", data); 
-        //save(data); 
+        save(data); 
+        resolve(data)
+    }) 
+} 
+exports.emitSensorAndSaveStart = (io, jsonArray)=>{
+    return new Promise((resolve, reject) =>{ 
+        let data = _.go(
+            jsonArray, 
+            _.take(10));   
+        io.emit("sensor", data); 
+        save(data); 
         resolve(data)
     }) 
 } 
