@@ -16,8 +16,7 @@ const save = async(data)=> {
     ).lean()
     return ret;  
 };
-// 전역변수로 증가시키는 setNextData
-let cnt = start_CNT;   
+
 const setType = data =>{
     for(let key in data){
         if(key == 'time')data[key] = new Date(data[key])
@@ -25,7 +24,10 @@ const setType = data =>{
     } 
     return data; 
 }
-const setNextData = (jsonArray) =>{
+
+// 전역변수로 증가시키는 setNextData
+let cnt = start_CNT;   
+const setNextData = (jsonArray) =>{ 
     const l = jsonArray.length;    
     let data = jsonArray[cnt];  
     data = {cnt : cnt, ...setType(data)} 
@@ -35,42 +37,41 @@ const setNextData = (jsonArray) =>{
 
 // 이터레이터로 만드는 cnt
 function *setCntIterator() {  
-    let cnt = start_CNT;  
+    let cnt = start_CNT;   
     while (true) {
         yield cnt;
         cnt = (cnt + 1);  
     }
-} 
-
+}  
 const iterator = setCntIterator(); 
 const setNextDataIterator = (jsonArray) =>{
     const l = jsonArray.length;      
-    const cnt = iterator.next().value;  
-    const idx = cnt % l; 
-    let data = jsonArray[idx];  
+    const cnt = iterator.next().value;   
+    const idx = cnt % l;
+    let data = jsonArray[idx];   
     data = {idx : idx, ...setType(data)};
     return data;    
 }
-
 
 //slice를 이용한 take from to
 const takeFromTo = (from, to, a) =>{
     if(to < from)return [...a.slice(from), ...a.slice(0, to + 1)] 
     else return a.slice(from, to + 1)
 }  
-function *setCntIterator(from) {  
+
+//이터레이터를 이용한 take from to
+function *setFromIterator(from) {  
     let cnt = from;  
     while (true) {
         yield cnt;
         cnt = (cnt + 1);  
     }
-}   
-//이터레이터를 이용한 take from to
+}    
 const takeFromToIterator = (from, to, a)=>{ 
     const l = a.length; 
     const cnt = to < from ? l - (from - to - 1) :  to - from  + 1
     return _.go(
-        setCntIterator(from), 
+        setFromIterator(from), 
         _.take(cnt), 
         _.map(e => a[e % l])
     )
@@ -79,18 +80,18 @@ const takeFromToIterator = (from, to, a)=>{
 exports.emitSensorAndSave = (io, jsonArray)=>{
     return new Promise((resolve, reject) =>{
         //const data = setNextData(jsonArray) 
-        const data = setNextDataIterator(jsonArray)  
+        const data = setNextDataIterator(jsonArray)   
         io.emit("sensor", data); 
         save(data); 
         resolve(data)
     }) 
 } 
-exports.emitSensorAndSaveStart = (io, jsonArray, firstIdx)=>{
+exports.emitSensorAndSaveStart = (io, jsonArray, toIdx)=>{
     const l = jsonArray.length
-    const from  = firstIdx
-    const to = (firstIdx + start_CNT - 1) / l
+    const from = toIdx - start_CNT < 0 ? (toIdx - start_CNT + l) % l : toIdx - start_CNT
+    const to = toIdx 
     return new Promise((resolve, reject) =>{ 
-        let data = takeFromToIterator(from, to, jsonArray)
+        let data = takeFromToIterator(from, to, jsonArray)  
         io.emit("sensor", data); 
         save(data); 
         resolve(data)

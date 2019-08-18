@@ -1,7 +1,7 @@
     
 <template>
   <div class="Map"> 
-    <div class="d3"></div>
+    <div class="d3 card"></div>
   </div>
 </template>
 <script>
@@ -17,8 +17,8 @@
         const koreaMap = require('../assets/skorea-provinces-2018-topo-simple.json');
         const _map = topojson.feature(koreaMap, koreaMap.objects.skorea_provinces_2018_geo); 
 
-        const width = 600;
-        const height = 1000;
+        const width = 300;
+        const height = 400;
         const svg = d3
           .select('.d3')
           .append('svg')
@@ -61,8 +61,8 @@
           .data(mapInfo)
           .enter()
           .append("svg:image")
-          .attr("width", 50)
-          .attr("height", 50)
+          .attr("width", 20)
+          .attr("height", 20)
           .attr('x', d => projection([d.lon, d.lat])[0])
           .attr('y', d => projection([d.lon, d.lat])[1])
           .attr('opacity', 1)
@@ -84,10 +84,12 @@
   }
 
   .d3 {
-    background: #eee;
-    width: 618px;
-    height: 1000px;
+    background: #eee; 
     margin: 0 auto;
+    margin-top:1rem; 
+  }
+  .d3:hover{
+    cursor: pointer; 
   }
 
   .Map path {
