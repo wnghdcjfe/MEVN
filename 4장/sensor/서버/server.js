@@ -26,6 +26,7 @@ const main = async()=>{
   mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err)) 
+  let firstIdx = 11; 
   //io 객체 설정 
   const jsonArray = await util.readCSV();  
   io.on('connection', async (socket) =>{  
@@ -35,11 +36,12 @@ const main = async()=>{
       console.log(`User disconnected :: ${util._date()} ID : ${socket.id}`)  
       userList.splice(userList.indexOf(socket.id),1); 
     });     
-    const sensor_first = await sensorController.emitSensorAndSaveStart(io, jsonArray); 
+    const sensor_first = await sensorController.emitSensorAndSaveStart(io, jsonArray, firstIdx); 
     console.log(`Emit user Current Sensor And Save DB :: ${util._date()} ${JSON.stringify(sensor_first)}`)    
   });    
   setInterval(async () => {   
     const sensor = await sensorController.emitSensorAndSave(io, jsonArray); 
+    firstIdx = sensor.idx; 
     console.log(`Emit user Current Sensor And Save DB :: ${util._date()} ${JSON.stringify(sensor)}`) 
   }, 1* 1000); 
   http.listen(PORT, ()=> console.log(`센서서버가 시작됩니다. http://127.0.0.1:${PORT} :: ${util._date()}`));

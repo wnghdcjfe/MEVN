@@ -33,7 +33,7 @@ const setNextData = (jsonArray) =>{
     return data;    
 }  
 
-// 이터레이터로도 만들 수 있다. 
+// 이터레이터로 만드는 cnt
 function *setCntIterator() {  
     let cnt = start_CNT;  
     while (true) {
@@ -46,13 +46,36 @@ const iterator = setCntIterator();
 const setNextDataIterator = (jsonArray) =>{
     const l = jsonArray.length;      
     const cnt = iterator.next().value;  
-    let data = jsonArray[cnt % l];  
-    data = {cnt : cnt, ...setType(data)};
+    const idx = cnt % l; 
+    let data = jsonArray[idx];  
+    data = {idx : idx, ...setType(data)};
     return data;    
 }
 
 
-//testModule
+//slice를 이용한 take from to
+const takeFromTo = (from, to, a) =>{
+    if(to < from)return [...a.slice(from), ...a.slice(0, to + 1)] 
+    else return a.slice(from, to + 1)
+}  
+function *setCntIterator(from) {  
+    let cnt = from;  
+    while (true) {
+        yield cnt;
+        cnt = (cnt + 1);  
+    }
+}   
+//이터레이터를 이용한 take from to
+const takeFromToIterator = (from, to, a)=>{ 
+    const l = a.length; 
+    const cnt = to < from ? l - (from - to - 1) :  to - from  + 1
+    return _.go(
+        setCntIterator(from), 
+        _.take(cnt), 
+        _.map(e => a[e % l])
+    )
+} 
+
 exports.emitSensorAndSave = (io, jsonArray)=>{
     return new Promise((resolve, reject) =>{
         //const data = setNextData(jsonArray) 
@@ -62,11 +85,12 @@ exports.emitSensorAndSave = (io, jsonArray)=>{
         resolve(data)
     }) 
 } 
-exports.emitSensorAndSaveStart = (io, jsonArray)=>{
+exports.emitSensorAndSaveStart = (io, jsonArray, firstIdx)=>{
+    const l = jsonArray.length
+    const from  = firstIdx
+    const to = (firstIdx + start_CNT - 1) / l
     return new Promise((resolve, reject) =>{ 
-        let data = _.go(
-            jsonArray, 
-            _.take(10));   
+        let data = takeFromToIterator(from, to, jsonArray)
         io.emit("sensor", data); 
         save(data); 
         resolve(data)
