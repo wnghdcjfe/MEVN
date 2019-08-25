@@ -1,6 +1,5 @@
 <template>
-  <div class="Number">
-    <h2>커져가는 원속의 숫자 + 게이지</h2>
+  <div class="Number card"> 
     <svg></svg> 
   </div>
 </template>
@@ -18,8 +17,8 @@
     },
     methods: {
       showCircle() {  
-        const width = window.innerWidth - 20;
-        const height = window.innerHeight - 20; 
+        const width = 500 - 20;
+        const height = 600 - 20; 
         const radius = Math.min(width, height) / 3;    
         const format = d3.format(".0%");  
         const group = d3.select("svg")

@@ -43,14 +43,14 @@ export default {
   @font-face {
     font-family: 오버워치;
     src: url(./assets/koverwatch.woff2);
-  } 
-  .logo {
-    float: left;
-  }
+  }  
 
   body {
     margin: 0 auto;
+    text-align: center;
+    color: #2c3e50;
   }
+
 
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -58,21 +58,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-  }
-
-  nav {
-    background: #262d3d;
-    height: 64px;
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  .logo {
-    float: left;
-    height: 64px;
-    width: 0;
-  }
-
+  } 
   nav a {
     font-weight: bold;
     color: #2c3e50;
@@ -90,4 +76,32 @@ export default {
     margin-top: 7px;
     height: 80%;
   }
+
+  nav {
+    background: #262d3d;
+    height: 64px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .logo {
+    float: left;
+  }
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block; 
+  margin: 1rem;
+  position: relative; 
+  padding: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+ 
+
+  .logo {
+    float: left;
+    height: 64px;
+    width: 0;
+  }
+
+
 </style>

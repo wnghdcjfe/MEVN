@@ -1,14 +1,13 @@
 <template>
   <div> 
-    <div v-for="c in charList">
-      {{c.value}}  
+    <div v-for="c in charList" class="chartWrap card">
+      <h2>{{c.text}}</h2> 
       <Chart :_key="c.value" :color = "c.value" :key="c.value"></Chart>
     </div> 
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
+<script> 
 import Chart from '@/components/Chart.vue'
 
 export default {
@@ -18,13 +17,10 @@ export default {
   }, 
     data() {
       return { 
-        charList : [
-          // {"key" : 1, "color" : "red", "value": "wv"},
-          // {"key" : 2, "color" : "blue", "value": "temp"},
-          // {"key" : 3, "color" : "green", "value": "humi"}
-           {"color" : "red", "value": "temp"}, 
-           {"color" : "green", "value": "wv"}, 
-           {"color" : "blue", "value": "humi"}
+        charList : [ 
+           {"color" : "red", "value": "temp", "text" : "온도"}, 
+           {"color" : "green", "value": "wv", "text" : "풍속"}, 
+           {"color" : "blue", "value": "humi", "text" : "습도"}, 
         ]
       }
     },
@@ -34,3 +30,13 @@ export default {
     }  
 }
 </script>
+<style>
+.chartWrap{
+  display:inline-block;
+}
+.chartWrap h2{
+    border-bottom: 2px solid #aaa;
+    padding-bottom: 10px;
+    margin: 0;
+} 
+</style>
