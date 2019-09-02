@@ -6,7 +6,8 @@
       </span>
       <router-link to="/">센서모니터링</router-link> |
       <router-link to="/map">지도예제</router-link> |
-      <router-link to="/number">증가하는 숫자예제</router-link>
+      <router-link to="/number">증가하는 숫자예제</router-link> | 
+      <router-link to="/imgslider">이미지슬라이더</router-link>
     </nav>
     <router-view />
   </div>

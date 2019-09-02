@@ -34,8 +34,7 @@
         if (mutation.type === "CHANGE_SENSOR_CHART") {
           if (!cnt) this.initDraw(this.sensors, this._key);
           else this.draw(this.sensors, this._key);
-          cnt = 1;
-          console.log("CNt", cnt)
+          cnt = 1; 
         }
 
       })

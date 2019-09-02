@@ -6,7 +6,8 @@ const io      = require('socket.io')(http)
 const util    = require('./util')()
 const sensorController = require('./controller/sensor')
 const path    = require('path')  
-const _path   = path.join(__dirname, '..', './dist')  
+const _path   = path.join(__dirname, '..', './dist') 
+const img_path   = path.join(__dirname, './img')   
 const PORT    = 12010 
 const mongoose = require('mongoose') 
 const USER = 'dabin'
@@ -18,6 +19,7 @@ let userList = [];
 const main = async()=>{
   //app 객체 설정 
   app.use('/', express.static(_path))  
+  app.use('/img', express.static(img_path))
   app.use(cors()) 
   // MongoDB connect 설정
   mongoose.connect(mongodbURL, {useNewUrlParser: true}) 

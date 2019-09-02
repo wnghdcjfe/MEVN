@@ -1,0 +1,27 @@
+.sliderWrap span {
+    display: block;
+    position: absolute;
+    top: 50%;
+}
+
+span.left {
+    left: 0;
+}
+
+span.right {
+    right: 0;
+}
+
+.sliderWrap div {
+    display: inline-block;
+    width: 100%;
+}
+
+.sliderWrap div img {
+    width: 100%;
+}
+
+.sliderWrap {
+    overflow: hidden;
+    position: relative;
+}
