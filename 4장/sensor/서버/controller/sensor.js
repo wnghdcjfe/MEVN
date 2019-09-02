@@ -76,6 +76,10 @@ const takeFromToIterator = (from, to, a)=>{
         _.map(e => a[e % l])
     )
 } 
+const takeFromToIterator2 = (from, to, a) => {  
+    const l = a.length; 
+    return [...L.map(i => a[i], from < to ? L.range(from, to + 1) : L.flat([L.range(from, l), L.range(0, to + 1)]))]
+}
 
 exports.emitSensorAndSave = (io, jsonArray)=>{
     return new Promise((resolve, reject) =>{
