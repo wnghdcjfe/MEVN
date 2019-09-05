@@ -42,7 +42,7 @@
   }
 </script>
 
-<style> 
+<style scoped> 
 .sliderWrap span {
     display: block;
     position: absolute;

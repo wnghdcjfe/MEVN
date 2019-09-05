@@ -24,7 +24,8 @@
         yScale: "",
         xAxis: "",
         yAxis: "",
-        line: ""
+        line: "", 
+        tooltip: ""
       }
     },
     mounted() {
@@ -46,6 +47,7 @@
           .attr("height", config.chartHeight + config.margin.top + config.margin.bottom)
           .append("g")
           .attr("transform", `translate(${config.margin.left},${config.margin.top})`)
+          
         this.xScale = d3.scaleTime().range([0, config.chartWidth])
         this.yScale = d3.scaleLinear().range([config.chartHeight, 0])
 
@@ -53,7 +55,12 @@
         this.xAxis = d3.axisBottom(this.xScale).tickFormat(timeFormat)
         this.yAxis = d3.axisLeft(this.yScale)
         this.line = d3.line().x(d => this.xScale(d.time)).y(d => this.yScale(d[key])).curve(d3.curveMonotoneX)
-
+        
+        this.tooltip = d3.select("body")
+                          .append("div")	
+                          .attr("class", "tooltip")				
+                          .style("opacity", 0); 
+        console.log(1)
       },
       initDraw(data, key) { 
         //data는 string형태로 오기 때문에 여기서 new Date 객체로 바꿔주어야 한다. 
@@ -80,29 +87,49 @@
 
         this.svg.append("g")
           .attr("class", "y axis")
-          .call(this.yAxis);
+          .call(this.yAxis); 
+
+        console.log(2)
+        // this.svg.selectAll("dot")	
+        //   .data(data)			
+        //   .enter().append("circle")								
+        //   .attr("r", 5)		
+        //   .attr("cx", d => this.xScale(d.time))		 
+        //   .attr("cy", d => this.yScale(d[key]))		
+        //   .on("mouseover", function(d) {		
+        //     this.tooltip.transition()		
+        //         .duration(200)		
+        //         .style("opacity", .9);		
+        //     this.tooltip	.html(d[key] + "<br/>")	
+        //         .style("left", (d3.event.pageX) + "px")		
+        //         .style("top", (d3.event.pageY - 28) + "px");	
+        //     })					
+        // .on("mouseout", function(d) {		
+        //     this.tooltip.transition()		
+        //         .duration(500)		
+        //         .style("opacity", 0);	
+        // });
       },
       //draw에서는 데이터 처리가 아닌 data를 통해서 차트틀 그리는 것에 대해 집중해야 한다. 
       draw(data, key) { 
-        data.forEach(function (d) {
-          d.time = new Date(d.time)
-        });
+        data.forEach(d =>d.time = new Date(d.time));
  
         const _min = d3.min(data, d => d[key])
         const _max = d3.max(data, d => d[key])
         this.xScale.domain(d3.extent(data, d => d.time)) 
-        this.yScale.domain([_min - margin_value, _max + margin_value])
- 
-        var svg = d3.select(`.Chart-${key} svg`).transition();
-        svg.select(".line")  
+        this.yScale.domain([_min - margin_value, _max + margin_value]) 
+        this.svg.select(".line")
+          .transition()
           .duration(750)
           .attr("d", this.line(data));
-        svg.select(".x.axis")  
+        this.svg.select(".x.axis")  
+          .transition()
           .duration(750)
           .call(this.xAxis);
-        svg.select(".y.axis")  
+        this.svg.select(".y.axis") 
+          .transition() 
           .duration(750)
-          .call(this.yAxis);
+          .call(this.yAxis);  
       }
     },
     computed: {
@@ -114,6 +141,10 @@
 </script>
 
 <style>
+.tooltip{
+  display:block;
+  position:fixed;
+}
   .Chart .line {
     fill: none;
     stroke: #f89e35;
