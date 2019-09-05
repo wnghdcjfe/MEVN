@@ -46,7 +46,7 @@ const main = async()=>{
     const sensor = await sensorController.emitSensorAndSave(io, jsonArray);  
     toIdx = sensor.idx;  
     console.log(`Send to user Current Sensor And Save DB :: ${util._date()} ${JSON.stringify(sensor)}`) 
-  }, 1 * 1000); 
+  }, 5 * 1000); 
   http.listen(PORT, ()=> console.log(`센서서버가 시작됩니다. http://127.0.0.1:${PORT} :: ${util._date()}`));
 }
 main();  
