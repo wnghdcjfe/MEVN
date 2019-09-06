@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+    <title>D3기초</title>
+    <style> 
+    circle{
+        fill: blue; 
+        stroke: #aaa; 
+    }
+    svg{
+        width: 100%; 
+    }
+    </style>
+</head>
+<body> 
+    <svg> 
+    </svg>
+</body>
+<script>
+    const data = [0, 50, 100]
+    const _range = [0, 400]; 
+    const xScale = d3.scaleLinear().domain([d3.min(data), d3.max(data)]).range(_range) 
+    const svg = d3.select("svg")
+    
+    // svg.append("circle").attr("cx", xScale(0)).attr("cy", 70).attr("r", 40)
+    // svg.append("circle").attr("cx", xScale(50)).attr("cy", 70).attr("r", 40)
+    // svg.append("circle").attr("cx", xScale(100)).attr("cy", 70).attr("r", 40)
+    const log = console.log
+    // circle이란 요소를 다 찾는다. 여기선 0개가 나온다. 
+    log(svg.selectAll("circle"))
+    // _enter에 data들을 바인딩한다. 가상의 문서요소  
+    log(svg.selectAll("circle").data(data))
+    // Selection.prototype = selection.prototype = {
+    //     constructor: Selection,
+    //     select: selection_select,
+    //     selectAll: selection_selectAll,
+    //     filter: selection_filter,
+    //     data: selection_data,
+    //     enter: selection_enter
+    // }
+    // //_enter이란 키에 해당하는 value를 통해 selection을 반환한다. 
+    // function selection_enter() {
+    //    return new Selection(this._enter || this._groups.map(sparse), this._parents);
+    // }
+
+    // _enter을 통해 비어있던 _group()을 완성한다.  실제 DOM을 갖지 못하는 것들을 대상으로 가상의 객체를 생성하게 된다. 
+    log(svg.selectAll("circle").data(data).enter())
+    // 완성한 _group를 토대로 circle을 거기에 맞게 바인딩하여 svg에 붙인다. 
+    //log(svg.selectAll("circle").data(data).enter().append("circle"))
+    svg.selectAll("circle").data(data).enter().append("circle").attr("cx", d => xScale(d)).attr("cy", 70).attr("r", 40)
+    
+</script>
+</html>
