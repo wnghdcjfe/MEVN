@@ -17,8 +17,9 @@ const _path       = path.join(__dirname, csvFilePath)
 const Sensor = require('./models/sensor.js');
 
 const main = async()=>{  
-  const sensorList = await csv().fromFile(_path); 
-  console.log(sensorList)
+  const sensorList = await csv().fromFile(_path);  
+  //미리 있을 Sensor collection은 drop한다. 
+  Sensor.collection.drop();
   Sensor.insertMany(sensorList, function(error, docs) {
       console.log('데이타 삽입완료')
   });
