@@ -15,7 +15,7 @@ const main = async()=>{
         "albumId": 12010,
         "id": 12010,
         "title": "큰돌",
-        "url": "https://via.placeholder.com/600/13454b",
+        "url": "jhc9639@naver.com",
         "thumbnailUrl": "https://via.placeholder.com/150/13454b"
     } 
     const new_photo = new Photo(_data) 
