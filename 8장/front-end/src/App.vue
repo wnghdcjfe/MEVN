@@ -3,9 +3,9 @@
   <div class="flexCenter">
     <circleComponent _key="cpuUsage" _key2="CPU"></circleComponent>
     <circleComponent _key="memUsage" _key2="메모리"></circleComponent> 
-  </div> 
-  <button @click="test">resTime 테스트</button>
+  </div>  
   <chart _key="avgResTime"></chart> 
+  <button @click="test" class="testButton">응답시간 테스트</button>
   <logTable></logTable> 
   </div>
 </template>
@@ -42,7 +42,7 @@
         'initLog'
       ]),
       test(){
-        axios.get(config.host) 
+        axios.get(`${config.host}/test`) 
       }
     }
   }
@@ -50,6 +50,19 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap'); 
+.testButton{
+  border:none;
+  background: #fff;  
+  border: 1px solid #dee3eb; 
+  padding: 6px 30px;
+  font-family:'Lato';
+  font-size:1rem;
+  transition:all .5s;
+}
+.testButton:hover{
+  cursor: pointer;
+  background: rgba(249, 158, 26, 0.7);
+}
 .flexCenter{
   display: flex;
     align-items: center;
@@ -60,14 +73,17 @@
 }
 p{
   margin: 0 auto;
+}  
+body{
+  margin:0 auto; 
+  height:100vh;
 }
-  #app {
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
-   
+#app{
+  padding:10px;
+  background: #f2f4f7;
+  font-family:'Lato';
+  text-align:center;
+  height: 100%;
+  box-sizing: border-box;
+}
 </style>

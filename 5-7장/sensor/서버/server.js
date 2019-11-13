@@ -24,10 +24,11 @@ const main = async()=>{
   app.use('/img', express.static(img_path))
   app.use(cors()) 
   // MongoDB connect 설정
-  mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
+  mongoose.connect(mongodbURL, {useNewUrlParser: true, useUnifiedTopology: true}) 
   .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err)) 
+  .catch((err) => console.error(err))   
   mongoose.set('useFindAndModify', false);
+
   let toIdx = 10; 
   //io 객체 설정 
   const jsonArray = await util.readCSV();  
@@ -38,8 +39,8 @@ const main = async()=>{
       console.log(`User disconnected :: ${util._date()} ID : ${socket.id}`)  
       userList.splice(userList.indexOf(socket.id),1); 
     });       
-    const sensor_first = await sensorController.emitSensorAndSaveStart(io, jsonArray, toIdx); 
-    console.log(`Send to user Current Sensor And Save DB in first :: ${util._date()} ${sensor_first}`)    
+    const sensor_first = await sensorController.emitSensorAndSaveStart(io, jsonArray, toIdx);  
+    console.log(`Send to user Current Sensor And Save DB in first :: ${util._date()}`)    
   });   
   //센서데이타는 항상 받자 마자 emit을 해줘야 한다. 그 부분을 재현 
   const sensor = await sensorController.emitSensorAndSave(io, jsonArray);  

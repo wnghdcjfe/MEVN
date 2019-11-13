@@ -15,7 +15,7 @@
     "avgResTime": "ms"
   }
 
-  const timeFormat = d3.timeFormat("%H:%M")
+  const timeFormat = d3.timeFormat("%H:%M:%S")
   import {
     mapState
   } from 'vuex'
@@ -56,8 +56,9 @@
         this.svg = d3.select(`.Chart-${key}`).append("svg")
           .attr("width", config.chartWidth + config.margin.left + config.margin.right)
           .attr("height", config.chartHeight + config.margin.top + config.margin.bottom)
+          .attr("class", "chartWrap")
           .append("g")
-          .attr("transform", `translate(${config.margin.left},${config.margin.top})`)
+          .attr("transform", `translate(${config.margin.left},${config.margin.top})`) 
 
         this.xScale = d3.scaleTime().range([0, config.chartWidth])
         this.yScale = d3.scaleLinear().range([config.chartHeight, 0])
@@ -105,7 +106,7 @@
             this.tooltip
               .html(content)
               .style("left", (d3.event.pageX - 92) + "px")
-              .style("top", (d3.event.pageY - 540)  + "px")
+              .style("top", (d3.event.pageY - 465)  + "px")
           })
           .on("mouseout", () => {
             this.tooltip.transition()
@@ -156,8 +157,13 @@
 </script>
 
 <style>
+.chartWrap{
+        border: 1px solid #dee3eb;
+    background: #fff;
+
+}
   .Chart {
-    position: relative;
+    position: relative; 
   }
 
   .Chart .line {
@@ -206,7 +212,7 @@
 } 
 .tooltip h2{
   margin:0;  
-  font-size:2.5rem;
+  font-size:2rem;
 }
 .tooltip p {
   margin: 0;
