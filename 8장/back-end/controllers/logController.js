@@ -19,8 +19,7 @@ exports.getLogLatestAvg = async () =>{
                   }
             }
         ]
-    )  
-    console.log(a)
+    )   
     const ret = {
         ...a[0], 
         time : new Date(), 

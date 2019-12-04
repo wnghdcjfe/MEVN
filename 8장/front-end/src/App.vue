@@ -76,7 +76,7 @@ p{
 }  
 body{
   margin:0 auto; 
-  height:100vh;
+  height:100%;
 }
 #app{
   padding:10px;
