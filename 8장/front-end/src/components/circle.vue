@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="`circle circle-${_key}`"></div> 
-    <p>{{_key2}} : 총 {{specLog[_key]}}% 사용중</p>
+    <p class="description">{{_key2}} : 총 {{specLog[_key]}}% 사용중</p>
   </div>
 </template>
 
@@ -89,7 +89,7 @@
 </script>
 
 <style>
-p{
+p.description{
   position:relative; 
   bottom: 10px;
 }
