@@ -5,8 +5,7 @@ const logSchema = new Schema({
     'time' : Date, 
     'method' : String, 
     'url' : String, 
-    'content-length' : Number, 
-    'content-length' : Number, 
+    'content-length' : Number,  
     'response-time' : Number
 });
 

@@ -4,8 +4,9 @@
     <circleComponent _key="cpuUsage" _key2="CPU"></circleComponent>
     <circleComponent _key="memUsage" _key2="메모리"></circleComponent> 
   </div>  
-  <chart _key="avgResTime"></chart> 
-  <button @click="test" class="testButton">응답시간 테스트</button>
+  <chart _key="response-time"></chart>  
+  <button @click="test" class="testButton">애러테스트-JSON.parse</button>
+  <button @click="test" class="testButton">애러테스트-스키마형식애러</button> 
   <logTable></logTable> 
   </div>
 </template>

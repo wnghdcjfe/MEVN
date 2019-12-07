@@ -6,25 +6,20 @@ exports.save = (json)=>{
 }  
 
 const setFloor = a => ~~(a * 10000) / 100;
-exports.getLogLatestAvg = async () =>{
-    const a = await Log.aggregate(
-        [
-            {$sort : {time : -1}}, 
-            {$limit :100},   
-            {
-                $group:
-                  { 
-                      _id: "$url", 
-                    avgResTime: { $avg: "$response-time" }
-                  }
-            }
-        ]
-    )   
-    const ret = {
-        ...a[0], 
-        time : new Date(), 
-        avgResTime : setFloor(a[0].avgResTime),  
-    }  
+//현재로부터 10초씩+ 10개씩만 가져오기
+exports.getResTimeLatest = async (url, num) =>{
+    let ret = await Log.find({
+        "url" : {
+            $eq : url
+        }
+    }).sort({
+        "time" : -1
+    }).select({
+        "_id" : 0, 
+        "response-time" : 1, 
+        "time" : 1
+    }).limit(num) 
+    ret.sort((a, b) => new Date(a.time) - new Date(b.time)); 
     console.log(ret)
     return ret;
 } 

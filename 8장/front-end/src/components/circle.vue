@@ -89,6 +89,10 @@
 </script>
 
 <style>
+p{
+  position:relative; 
+  bottom: 10px;
+}
 .backColor{
     stroke: #aaa; 
     fill: #aaa; 

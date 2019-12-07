@@ -11,6 +11,7 @@ const jsonFormat = (tokens, req, res) => {
         'content-length' : tokens.res(req, res, 'content-length'), 
         'response-time' : tokens['response-time'](req, res)
     }
+    console.log(obj)
     logController.save(obj); 
     return `${obj['time']} :: ${obj['remote-address']} - [${obj['method']}] ${obj['url']} ${obj['response-time']}`  
 }

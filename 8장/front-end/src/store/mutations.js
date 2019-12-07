@@ -4,12 +4,7 @@ import * as types from './mutations-type';
       state.specLog = payload 
     }, 
     [types.CHANGE_RESPONSE_CHART](state, payload) {   
-        if(state.resTimeList.length < 10){ 
-          state.resTimeList.push(payload);
-        }else{
-          state.resTimeList.shift(); 
-          state.resTimeList.push(payload); 
-        } 
+      state.resTimeList = payload;
     },  
     [types.CHANGE_LOG_CHART](state, payload) {     
       state.logList = payload; 
