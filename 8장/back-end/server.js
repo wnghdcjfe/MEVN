@@ -10,15 +10,30 @@ const middleware = require('./middleware/logging.js')()
 const specController = require('./controllers/specController.js') 
 const testController = require('./controllers/testController.js')
 const logController = require('./controllers/logController.js')
+const ErrorLogController = require('./controllers/ErrorLogController.js')
+const errorCode = require('./config').errorCode
+
 const path_dist   = path.join(__dirname, '..', 'front-end/dist')   
 const {PORT, USER, PWD, HOST, DB} = require('./config')   
 const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`    
+ 
 const main = async()=>{
   //app 객체 설정 
   app.use('/', express.static(path_dist))    
   app.use(cors())  
   app.use(middleware.morganLog()) 
   app.get('/test', testController.sendComment)
+  app.get('/test_request', testController.testing) 
+  // error handler
+  app.use((error, req, res, next) =>{    
+      console.log(`${util._date()} :: Error ${error}`)   
+      const message = error.message.replace(/"|\\/g, ''); 
+      const founded = errorCode.find(e => e.name.test(message)) 
+      const code = founded ? founded.code : 100000  
+      ErrorLogController.save({time : new Date(), message : message, error : error.stack, code : code})
+      return res.status(500).send({message: "서버에서 오류가 발생했습니다.", code : code}); 
+  });  
+  
   // MongoDB connect 설정   
   await mongoose.connect(mongodbURL, {useNewUrlParser: true, useUnifiedTopology: true}) 
   .then(() =>  console.log('connection succesful'))

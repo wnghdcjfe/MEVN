@@ -5,16 +5,13 @@
     <circleComponent _key="memUsage" _key2="메모리"></circleComponent> 
   </div>  
   <chart _key="response-time"></chart>  
-  <button @click="test" class="testButton">애러테스트-JSON.parse</button>
-  <button @click="test" class="testButton">애러테스트-스키마형식애러</button> 
-  <logTable></logTable> 
+  <button @click="test" class="testButton">애러테스트</button>  
   </div>
 </template>
 
 <script>
   import circleComponent from './components/circle.vue'
-  import chart from './components/chart.vue'
-  import logTable from './components/logTable.vue' 
+  import chart from './components/chart.vue' 
   import axios from 'axios'; 
   import config from './config'; 
 
@@ -26,8 +23,7 @@
     name: 'app',
     components: {
       circleComponent, 
-      chart,
-      logTable
+      chart
     },
     data() {
       return {}
@@ -40,11 +36,8 @@
 
       ]),
       ...mapActions([
-        'initLog'
-      ]),
-      test(){
-        axios.get(`${config.host}/test`) 
-      }
+        'initLog', 'test'
+      ])
     }
   }
 </script>

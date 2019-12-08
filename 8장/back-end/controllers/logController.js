@@ -19,7 +19,6 @@ exports.getResTimeLatest = async (url, num) =>{
         "response-time" : 1, 
         "time" : 1
     }).limit(num) 
-    ret.sort((a, b) => new Date(a.time) - new Date(b.time)); 
-    console.log(ret)
+    ret.sort((a, b) => new Date(a.time) - new Date(b.time));  
     return ret;
 } 

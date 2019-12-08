@@ -12,6 +12,7 @@
     "core-js": "^3.1.2",
     "d3": "^5.12.0",
     "vue": "^2.6.10",
+    "vue-sweetalert2": "^2.1.5",
     "vuex": "^3.1.1"
   },
   "devDependencies": {
@@ -32,7 +33,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
