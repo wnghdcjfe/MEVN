@@ -5,8 +5,5 @@ import * as types from './mutations-type';
     }, 
     [types.CHANGE_RESPONSE_CHART](state, payload) {   
       state.resTimeList = payload;
-    },  
-    [types.CHANGE_LOG_CHART](state, payload) {     
-      state.logList = payload; 
-  },   
+    }
 } 

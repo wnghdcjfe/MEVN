@@ -1,14 +1,11 @@
 import axios from 'axios'
 import config from '../config' 
-import Vue from 'vue';
-console.log(config.host) 
+import Vue from 'vue'; 
 const service = axios.create({
   baseURL: config.host, 
   timeout: 10000  
 })
- 
-service.interceptors.response.use(res => res.data, err => {  
-    // if has response show the error 
+service.interceptors.response.use(res => res.data, err => {   
     if (err.response) {
         const message = err.response.data.message;
         const code = err.response.data.code;

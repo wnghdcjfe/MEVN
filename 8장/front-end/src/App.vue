@@ -11,9 +11,7 @@
 
 <script>
   import circleComponent from './components/circle.vue'
-  import chart from './components/chart.vue' 
-  import axios from 'axios'; 
-  import config from './config'; 
+  import chart from './components/chart.vue'  
 
   import {
     mapMutations,
@@ -43,7 +41,29 @@
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap'); 
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');  
+p{
+  margin: 0 auto;
+}  
+body{
+  margin:0 auto; 
+  height:100%;
+}
+#app{ 
+  background: #f2f4f7;
+  font-family:'Lato';
+  text-align:center;
+  height: 100%;
+  box-sizing: border-box;
+}
+.flexCenter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flexCenter div{
+  margin: 0 20px;
+}
 .testButton{
   border:none;
   background: #fff;  
@@ -56,28 +76,5 @@
 .testButton:hover{
   cursor: pointer;
   background: rgba(249, 158, 26, 0.7);
-}
-.flexCenter{
-  display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.flexCenter div{
-  margin: 0 20px;
-}
-p{
-  margin: 0 auto;
-}  
-body{
-  margin:0 auto; 
-  height:100%;
-}
-#app{
-  padding:10px;
-  background: #f2f4f7;
-  font-family:'Lato';
-  text-align:center;
-  height: 100%;
-  box-sizing: border-box;
-}
+} 
 </style>

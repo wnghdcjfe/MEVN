@@ -30,12 +30,9 @@
         xScale: "",
         yScale: "",
         xAxis: "",
-        yAxis: "",
-        line: "",
+        yAxis: "", 
         tooltip: "",
-        circle: "", 
-        defs : null, 
-        bgGradient : null, 
+        circle: "",   
         area : null
       }
     },
@@ -51,6 +48,7 @@
       })
     },
     methods: {
+      //svg와 scale, axis함수, area, tooltip을 설정합니다.
       setAreaAndScale(key) {
         this.svg = d3.select(`.Chart-${key}`).append("svg")
           .attr("width", config.chartWidth + config.margin.left + config.margin.right)
@@ -63,10 +61,7 @@
         this.yScale = d3.scaleLinear().range([config.chartHeight, 0])
 
         this.xAxis = d3.axisBottom(this.xScale).tickFormat(timeFormat)
-        this.yAxis = d3.axisLeft(this.yScale)
-        this.line = d3.line().x(d => this.xScale(d.time)).y(d => this.yScale(d[key])).curve(d3.curveMonotoneX)
-        this.line = d3.line().x(d => this.xScale(d.time)).y(d => this.yScale(d[key])).curve(d3.curveMonotoneX)
-
+        this.yAxis = d3.axisLeft(this.yScale) 
 
         this.area = d3.area().curve(d3.curveMonotoneX).x(d => this.xScale(d.time)).y0(config.chartHeight).y1(d => this.yScale(d[key]))
         this.tooltip = d3.select(`.tooltip`)
@@ -107,16 +102,15 @@
         this.svg.append("path")
           .datum(data)  
           .attr("class", "area")
-          .attr("d", this.area);
- 
+          .attr("d", this.area);  
         this.circle = this.svg.selectAll("dot")
           .data(data)
           .enter().append("circle")
           .attr("r", 3)
-          .on("mouseover", d => { 
-            this.tooltip.transition().duration(200).style("opacity", 1)
+          .on("mouseover", d =>{  
             const content = `<p>${keyToHanguel[key]}</p> <p>[${timeFormat(d.time)}]</p><h2>${d[key]}${keyUnit[key]}</h2>`
-            this.tooltip.html(content).style("left", (d3.event.pageX - 92) + "px").style("top", (d3.event.pageY - 465)  + "px")
+            this.tooltip.html(content).style("left", (d3.event.pageX - 80) + "px").style("top", (d3.event.pageY - 452)  + "px")
+            this.tooltip.transition().duration(200).style("opacity", 1)
           })
           .on("mouseout", () => {
             this.tooltip.transition().duration(200).style("opacity", 0);
@@ -158,40 +152,25 @@
   }
 </script>
 
-<style>
+<style> 
+.chartWrap{
+  border: 1px solid #dee3eb;
+  background: #fff;
+}
+.Chart, .Chart svg{
+  position: relative; 
+}    
+circle {
+  fill : #4fc08d;
+}
 
 .area {
   fill: url(#temperature-gradient); 
   fill-opacity : 0.4;
 }
-.chartWrap{
-        border: 1px solid #dee3eb;
-    background: #fff;
 
-}
-  .Chart {
-    position: relative; 
-  }
-
-  .Chart .line {
-    fill: none;
-    stroke: #f89e35;
-    stroke-width: 2px;
-  }
-
-  .Chart-humi .line {
-    stroke: #42b983;
-  }
-
-  .Chart-wv .line {
-    stroke: #262d3d;
-  }
-
-  circle {
-    fill : #4fc08d;
-  }
-  
 .tooltip {
+  z-index: 1;
   position: absolute;
   display: block;
   text-align: center;

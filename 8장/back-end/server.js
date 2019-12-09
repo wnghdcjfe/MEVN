@@ -24,12 +24,13 @@ const main = async()=>{
   app.use(middleware.morganLog()) 
   app.get('/test', testController.sendComment)
   app.get('/test_request', testController.testing) 
-  // error handler
+
+  // 애러핸들러
   app.use((error, req, res, next) =>{    
       console.log(`${util._date()} :: Error ${error}`)   
       const message = error.message.replace(/"|\\/g, ''); 
       const founded = errorCode.find(e => e.name.test(message)) 
-      const code = founded ? founded.code : 100000  
+      const code = founded ? founded.code : 100000;
       ErrorLogController.save({time : new Date(), message : message, error : error.stack, code : code})
       return res.status(500).send({message: "서버에서 오류가 발생했습니다.", code : code}); 
   });  
@@ -50,7 +51,7 @@ const main = async()=>{
     const log = await logController.getResTimeLatest('/test', 10); // 50초이후에 하면 됩니다.
     io.emit("spec", spec);  
     io.emit("log", log);  
-    specController.save(spec);    
+    await specController.save(spec);    
   }, 5 * 1000);   
  
   http.listen(PORT, ()=> console.log(`로그시스템이 시작됩니다. http://127.0.0.1:${PORT} :: ${util._date()}`));

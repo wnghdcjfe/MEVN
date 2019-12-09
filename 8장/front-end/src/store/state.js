@@ -1,5 +1,4 @@
-export default {
-    logList : [], 
+export default { 
     resTimeList : [], 
     specLog: {
         "cpuUsage" : 0, 

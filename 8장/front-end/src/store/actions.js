@@ -7,6 +7,6 @@ export default {
     async test(){ 
         const ret = await service.get('/test_request')
         if(!ret) return;  
-        console.log('로직이 실행됩니다.')
+        console.log('아래에 있는 로직이 실행됩니다.')
     }
 }; 
