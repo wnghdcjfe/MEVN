@@ -13,8 +13,7 @@
   import circleComponent from './components/circle.vue'
   import chart from './components/chart.vue'  
 
-  import {
-    mapMutations,
+  import { 
     mapActions
   } from 'vuex'
   export default {
@@ -22,17 +21,11 @@
     components: {
       circleComponent, 
       chart
-    },
-    data() {
-      return {}
-    },
+    }, 
     mounted() {
       this.initLog(this.$socket);
     },
-    methods: {
-      ...mapMutations([
-
-      ]),
+    methods: { 
       ...mapActions([
         'initLog', 'test'
       ])

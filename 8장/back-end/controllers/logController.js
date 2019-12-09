@@ -3,9 +3,7 @@ const Log = require('../models/log.js');
 exports.save = (json)=>{
     const new_log = new Log(json)
     return new_log.save(); 
-}  
-
-const setFloor = a => ~~(a * 10000) / 100;
+}   
 //현재로부터 10초씩+ 10개씩만 가져오기
 exports.getResTimeLatest = async (url, num) =>{
     let ret = await Log.find({

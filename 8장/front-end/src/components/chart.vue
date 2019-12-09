@@ -87,7 +87,7 @@
 
         // 그라데이션을 설정하기 위해 area
         this.svg.append("linearGradient")
-          .attr("id", "temperature-gradient")
+          .attr("id", "response-gradient")
           .attr("gradientUnits", "userSpaceOnUse")
           .attr("x1", 0).attr("y1", this.yScale(0))
           .attr("x2", 0).attr("y2", this.yScale(_max))
@@ -165,7 +165,7 @@ circle {
 }
 
 .area {
-  fill: url(#temperature-gradient); 
+  fill: url(#response-gradient); 
   fill-opacity : 0.4;
 }
 
