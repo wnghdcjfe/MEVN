@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./models/User.js');   
-const Item = require('./models/Item.js'); 
-//Set up default mongoose connection
+const Item = require('./models/Item.js');  
 const mongoDB = 'mongodb://127.0.0.1/my_database';  
 const main = async()=>{ 
     await mongoose.connect(mongoDB, {useUnifiedTopology: true, useNewUrlParser: true })
@@ -18,9 +17,10 @@ const main = async()=>{
         price : 2450
     } 
     const new_user = new User(user) 
-    const new_item = new Item(item)
-    await new_user.save(); 
-
+    await new_user.save();
+    //const new_item = await Item.create(item);  // --- (1)
+    const new_item = new Item(item) 
+    await new_item.save();
     const before = await User.findOne({
         name : {
             $eq : "이승철"
@@ -29,7 +29,7 @@ const main = async()=>{
             $eq : '12010'
         }
     }) 
-    before.items.push(new_item); 
+    before.items.push(new_item); // --- (2)
     await before.save(); 
     const after = await User.findOne({
         name : {
@@ -40,5 +40,7 @@ const main = async()=>{
         }
     }) 
     console.log(after)
+    const foundedItem = await Item.findOne({ _id : after.items[0]})  // --- (3)
+    console.log(foundedItem)
 }  
 main();

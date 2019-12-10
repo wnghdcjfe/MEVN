@@ -6,9 +6,9 @@ const userSchema = new Schema({
     items : [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "item",
+            ref: "item"
         }
-    ]
+    ]  
 });
 
 module.exports = mongoose.model('User', userSchema); 
