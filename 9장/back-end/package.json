@@ -10,8 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
     "passport-kakao": "^1.0.0",
-    "passport-naver": "^1.0.6"
+    "passport-naver": "^1.0.6",
+    "socket.io": "^2.3.0",
+    "fxjs": "^0.14.1",
+    "jsonwebtoken": "^8.5.1",
+    "@hapi/joi": "^16.1.8",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
+    "sanitize-html": "^1.20.1"
   }
 }
