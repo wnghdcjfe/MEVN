@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "fullpage.js": "^3.0.8",
     "morgan": "^1.9.1"
   }
 }

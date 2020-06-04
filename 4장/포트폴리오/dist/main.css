@@ -1,0 +1,144 @@
+@font-face {
+	font-family: 'KyoboHand';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+	padding: 0;
+	margin: 0;
+	font-family: 'KyoboHand', sans-serif;
+}
+
+img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.blueBack {
+	background: #71caf2;
+}
+
+.redBack {
+	background: #d94b01;
+}
+
+.yellowBack {
+	background: #f9b629;
+}
+
+.info {
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
+	padding: 5px 0;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.centerTop {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+h1 {
+	font-size: 5rem;
+	color: white;
+	font-weight: normal;
+	letter-spacing: 10px;
+	padding: 10px;
+}
+
+p {
+	font-size: 2em;
+	color: white;
+}
+
+.section {
+	text-align: center;
+	background-size: cover;
+}
+.title{  
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.section img{
+	width: 1000px;
+}
+.content{
+	width:1000px;
+	margin:0 auto;
+	text-align: left;
+}
+.slide {
+	background-size: cover;
+}
+ 
+.fade-in {
+	opacity: 0;
+	animation: fadeIn ease 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.letter {
+	opacity: 0;
+	animation: letterAni ease 1s;
+	animation-delay: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes letterAni {
+	0% {
+		letter-spacing: 10px;
+	}
+
+	100% {
+		letter-spacing: 20px;
+		opacity: 1;
+	}
+}
