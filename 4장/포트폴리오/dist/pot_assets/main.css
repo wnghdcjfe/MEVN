@@ -1,0 +1,165 @@
+@font-face {
+	font-family: 'KyoboHand';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body,
+div, 
+h1,
+h2,
+h3,
+h4, 
+p{
+	padding: 0;
+	margin: 0;
+	font-family: 'KyoboHand', sans-serif;
+}
+
+img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.section img{
+	width: 700px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.blueBack {
+	background: #71caf2;
+}
+
+.redBack {
+	background: #d94b01;
+}
+
+.yellowBack {
+	background: #f9b629;
+}
+
+.info {
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
+	padding: 5px 0;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.centerTop {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.left, .right{
+	width:40%; 
+	padding: 2rem;
+}
+.left img{
+	width: 100%; 
+}
+.right{
+	border-left: 3px solid white;  
+}
+h1 {
+	font-size: 5rem;
+	color: white;
+	font-weight: normal;
+	letter-spacing: 10px;
+	padding: 10px;
+}
+
+p {
+	font-size: 1.5rem;
+	color: white;
+}
+
+.section {
+	text-align: center;
+	background-size: cover;
+}
+.bold{
+	font-weight: bold;
+	text-align: center;
+	position: relative;
+}
+ 
+.bold::after{
+	position: absolute;
+	top:10%; 
+	left : 0; 
+	width: 20%;  
+	display: block;
+	content : '';
+	height: .3rem; 
+	background: white; 
+}
+.bold::before{
+	position: absolute;
+	top:10%; 
+	right : 0; 
+	width: 20%;  
+	display: block;
+	content : '';
+	height: .3rem; 
+	background: white; 
+}
+.blank{
+	width:100%; 
+	height: 2rem;
+}
+.title{  
+    width: 700px;
+	margin: 0 auto; 
+	margin-bottom: 1rem;
+}  
+.content{
+	width:700px;
+	margin:0 auto;
+	text-align: left;
+}
+.slide {
+	background-size: cover;
+}
+ 
+.fade-in {
+	opacity: 0;
+	animation: fadeIn ease 1s;
+	animation-fill-mode: forwards;
+} 
+@keyframes fadeIn {
+	0% {
+		opacity: 0; 
+	}
+
+	100% {
+		opacity: 1;  
+	}
+} 
+.letter {
+	opacity: 0;
+	animation: letterAni ease 1s;
+	animation-delay: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes letterAni {
+	0% {
+		letter-spacing: 10px;
+	}
+
+	100% {
+		letter-spacing: 20px;
+		opacity: 1;
+	}
+}
