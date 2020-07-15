@@ -11,7 +11,7 @@ mongoose.connect(mongodbURL, {useNewUrlParser: true})
 const Photo = require('./models/photo.js');
 
 const main = async()=>{  
-  const t = await Photo.updateMany({
+  const t = await Photo.updateOne({
       "title" : {
         $eq : '큰돌'
       }
@@ -19,30 +19,7 @@ const main = async()=>{
       $set : {
         "url" : 'jhc9639@naver.com'
       }
-    }, {
-      upsert: true, 
-      multi: true, 
-      new : true
     }).lean();
   console.log(t)
 }  
-main();
-
-const main2 = async()=>{  
-  const t = await Photo.updateMany({
-      "title" : {
-        $in : ['큰돌', '홍철', '현영','승철']
-      }
-    }, {
-      $set : {
-        "url" : 'jhc9639@naver.com'
-      }
-    }, {
-      upsert: true, 
-      multi: true, 
-      new : true
-    }).lean();
-  console.log(t)
-}  
-// main2();
-  
+main(); 
