@@ -1,11 +1,17 @@
 <template>
-  <div class="sliderWrap" :style="{
+  <div class="sliderWrap">  
+    <span class="left" @click="toLeft">◀</span>
+    <span class="right" @click="toRight">▶</span>
+    <p>{{activateImg.name}}</p>
+    <img :src="activateImg.src" :alt="activateImg.name" :style="{
       width: `${width}px`, 
       height: `${height}px`
     }">  
-    <span class="left" @click="toLeft">◀</span>
-    <span class="right" @click="toRight">▶</span>
-    <img :src="activateImg.src" :alt="activateImg.name"> 
+    <div class="dot">
+      <span @click="setActive(0)" :class="{ active: currIdx === 0 }"></span>
+      <span @click="setActive(1)" :class="{ active: currIdx === 1 }"></span>
+      <span @click="setActive(2)" :class="{ active: currIdx === 2 }"></span> 
+    </div>
   </div>
 </template> 
 
@@ -32,6 +38,9 @@
       }, 
       toLeft(){
            this.currIdx = Math.max(this.currIdx - 1, 0) 
+      }, 
+      setActive(idx){
+        this.currIdx = idx; 
       }
     },
     computed: { 
@@ -43,31 +52,46 @@
 </script>
 
 <style scoped> 
-.sliderWrap span {
+.sliderWrap > span {
     display: block;
     position: absolute;
-    top: 50%;
+    top: calc(50% - 1.25rem);
+    font-size: 2.5rem;
+    transition: all .5s ease;
 }
 
 .sliderWrap span:hover{
   cursor: pointer;
 }
-
+p{
+    position: absolute;  
+    bottom: 10px;
+    right: 55px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 10px;
+}
 span.left {
+    left: 10px; 
+}
+span.left:hover {
     left: 0;
 }
-
 span.right {
+    right: 10px;
+}
+span.right:hover {
     right: 0;
 }
 
-.sliderWrap div {
+.sliderWrap > div {
     display: inline-block;
     width: 100%;
 }
 
-.sliderWrap img {
-    width: 100%;
+.sliderWrap > img {
+    width: 100%; 
+  object-fit: cover;
 }
 
 .sliderWrap {
@@ -75,5 +99,25 @@ span.right {
     position: relative;
     margin: 0 auto;
     margin-top: 20px;
+} 
+.dot{
+  position: relative;
 }
+.dot > span{ 
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.5s ease;
+}
+
+.dot > span:hover {
+  cursor: pointer;
+  background-color: #717171;
+}
+.dot > span.active{
+  background-color: #717171; 
+} 
 </style>
