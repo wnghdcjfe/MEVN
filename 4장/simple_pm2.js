@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
 }); 
 
 setTimeout(()=>{ 
-  //애러를 발생시켜서 1초마다 서버가 죽게 만듭니다.
+  //애러를 발생시켜서 1초마다 서버가 중지되게 만듭니다.
   JSON.parse("{Z")
 }, 1000)
 server.listen(PORT, () => {
