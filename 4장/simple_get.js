@@ -1,5 +1,5 @@
 const express = require('express')
-const app = express();
+const app = express()
 const loogger = require('morgan')
 const PORT = 3000 
 app.use(loogger('tiny')) 
