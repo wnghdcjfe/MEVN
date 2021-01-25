@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const PhotoSchema = new Schema({
     albumId: Number, 
@@ -7,6 +7,6 @@ const PhotoSchema = new Schema({
     title: String, 
     url : String, 
     thumbnailUrl : String
-});
+})
 
-module.exports = mongoose.model('Photo', PhotoSchema); 
+module.exports = mongoose.model('Photo', PhotoSchema) 

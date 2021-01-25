@@ -4,11 +4,11 @@ const PWD = 'dabin12010'
 const HOST = 'localhost:27017'
 const DB = 'sensor'
 const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`
-mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false)
 mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
 .then(() =>  console.log('connection succesful'))
 .catch((err) => console.error(err))
-const Sensor = require('./models/sensor.js');
+const Sensor = require('./models/sensor.js')
 
 
 const main = async()=>{  
@@ -45,5 +45,5 @@ const main = async()=>{
   console.log(test3)
   //[ { time: 2019-08-01T15:01:00.000Z, temp: 26.2, min: 1 }]
 }  
-main();
+main()
  

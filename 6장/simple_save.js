@@ -4,11 +4,11 @@ const PWD = 'dabin12010'
 const HOST = 'localhost:27017'
 const DB = 'sensor'
 const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`
-mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false)
 mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
 .then(() =>  console.log('connection succesful'))
 .catch((err) => console.error(err))
-const Photo = require('./models/photo.js');
+const Photo = require('./models/photo.js')
 
 const main = async()=>{ 
     const _data = {
@@ -19,7 +19,7 @@ const main = async()=>{
         "thumbnailUrl": "https://via.placeholder.com/150/13454b"
     } 
     const new_photo = new Photo(_data) 
-    const t = await new_photo.save();
+    const t = await new_photo.save()
     console.log(t)
 }  
-main(); 
+main() 

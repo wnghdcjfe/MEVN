@@ -4,11 +4,11 @@ const PWD = 'dabin12010'
 const HOST = 'localhost:27017'
 const DB = 'sensor'
 const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`
-mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false)
 mongoose.connect(mongodbURL, {useNewUrlParser: true}) 
 .then(() =>  console.log('connection succesful'))
 .catch((err) => console.error(err))
-const Photo = require('./models/photo.js');
+const Photo = require('./models/photo.js')
 
 const main = async()=>{  
   const t = await Photo.updateMany({
@@ -23,10 +23,10 @@ const main = async()=>{
       upsert: true, 
       multi: true, 
       new : true
-    }).lean();
+    }).lean()
   console.log(t)
 }  
-main();
+main()
 
 const main2 = async()=>{  
   const t = await Photo.updateMany({
@@ -41,8 +41,8 @@ const main2 = async()=>{
       upsert: true, 
       multi: true, 
       new : true
-    }).lean();
+    }).lean()
   console.log(t)
 }  
-// main2();
+// main2()
   

@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const morgan = require('morgan'); 
+const morgan = require('morgan') 
 const logController = require('../controllers/logController') 
 const jsonFormat = (tokens, req, res) => {
     const obj = { 
@@ -12,7 +12,7 @@ const jsonFormat = (tokens, req, res) => {
         'response-time' : tokens['response-time'](req, res)
     }
     //console.log(obj)
-    logController.save(obj); 
+    logController.save(obj) 
     return `${obj['time']} :: ${obj['remote-address']} - [${obj['method']}] ${obj['url']} ${obj['response-time']}`  
 }
 module.exports = () =>{
@@ -21,5 +21,5 @@ module.exports = () =>{
             return morgan(jsonFormat)
         }
     }    
-};
+}
  
