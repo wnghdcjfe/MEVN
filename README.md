@@ -7,6 +7,9 @@ MEVN교과서에 나오는 모든 코드조각들입니다. 문의사항은 jhc9
 <p align="center"> 
   <img src="https://raw.githubusercontent.com/wnghdcjfe/MEVN/master/image/07-writer-03.gif" width="700">
 </p> 
+dasdadsdasd
+
+dasdasd
 
 ## 실시간 센서 라인 차트
 
