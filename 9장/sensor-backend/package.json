@@ -1,0 +1,23 @@
+{
+  "name": "sensor-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "express": "^4.17.1",
+    "fxjs": "^0.21.1",
+    "mongoose": "^5.11.15",
+    "socket.io": "^3.1.1"
+  }
+}

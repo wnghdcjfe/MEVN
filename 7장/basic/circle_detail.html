@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>D3기초 - circle의 detail</title>
+</head>
+
+<body>
+    <svg>
+    </svg>
+</body>
+<script>
+    const data = [0, 50, 100] 
+    const svg = d3.select("svg")
+    const log = console.log
+    //make_circle2()
+    // circle이란 요소를 다 찾습니다.  처음에는 _groups에는 아무것도 없죠. _groups: [NodeList(0)]
+    log(svg.selectAll("circle"))
+    // _enter에 data들을 바인딩합니다. 데이타의 수 만큼 가상의 문서요소가 만들어지게 됩니다. _groups: [Array(3)]
+    log(svg.selectAll("circle").data(data))
+    // _enter을 통해 비어있던 _group()을 완성합니다. _groups: Array(1) 0: (3) [Ot, Ot, Ot] 하지만 아직 실제 DOM을 갖지는 못하죠. 가상의 객체 3개가 완성이 되었습니다.
+    log(svg.selectAll("circle").data(data).enter())
+    // 완성한 _group를 토대로 circle을 거기에 맞게 바인딩하여 마지막으로 svg에 붙입니다. 짠, 데이타 수에 맞는 circle 3개가 완성되었습니다. _groups: Array(1) 0: (3) [circle, circle, circle]
+    log(svg.selectAll("circle").data(data).enter().append("circle"))
+</script>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>D3기초 - circle과 axis</title>
+    <style> 
+        svg {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <svg>
+    </svg>
+</body>
+<script>
+    const arc = (r, sign) => r ? `a${r * sign[0]},${r * sign[1]} 0 0 1 ${r * sign[2]},${r * sign[3]}` : ""
+    const roundedRect = (x, y, width, height, r) => {
+        r = [Math.min(r[0], height, width),
+            Math.min(r[1], height, width),
+            Math.min(r[2], height, width),
+            Math.min(r[3], height, width)
+        ];
+
+        return `M${x + r[0]},${y
+            }h${width - r[0] - r[1]}${arc(r[1], [1, 1, 1, 1])
+            }v${height - r[1] - r[2]}${arc(r[2], [1, 1, -1, 1])
+            }h${-width + r[2] + r[3]}${arc(r[3], [1, 1, -1, -1])
+            }v${-height + r[3] + r[0]}${arc(r[0], [1, 1, 1, -1])
+            }z`;
+    }
+
+    const margin = {
+        left: 50,
+        right: 50,
+        bottom: 50,
+        top: 50
+    }
+    const width = 500
+    const height = 500
+    const data = [{
+            name: "1.24",
+            value: 437
+        }, {
+            name: "1.25",
+            value: 349
+        }, {
+            name: "1.26",
+            value: 559
+        },
+        {
+            name: "1.27",
+            value: 497
+        },
+        {
+            name: "1.28",
+            value: 469
+        },
+        {
+            name: "1.29",
+            value: 458
+        }
+    ]
+    const x = d3.scaleBand()
+        .domain(data.map(d => d.name))
+        .range([margin.left, width - margin.right])
+        .padding(0.5)
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.value)]).nice()
+        .range([height - margin.bottom, margin.top])
+
+    const xAxis = g => g
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x)
+            .tickSizeOuter(0))
+    const yAxis = g => g
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y))
+        .call(g => g.select(".domain").remove())
+ 
+    const svg = d3.select("svg")
+    svg.append("g")
+        .attr("fill", "#41B883")
+        .selectAll("path").data(data).enter().append("path")
+        .attr("d", d => roundedRect(
+            x(d.name),
+            y(d.value),
+            x.bandwidth(),
+            y(0) - y(d.value),
+            [10, 10, 0, 0]
+        ))
+        svg.append("g") 
+        .selectAll("text").data(data).enter().append("text")
+        .attr("y", d => y(d.value))
+        .attr("x", d => x(d.name))
+        .attr("font-weight", "bold") 
+        .text(d => d.value)
+
+        
+    svg.append("g")
+        .call(xAxis);
+
+    svg.append("g")
+        .call(yAxis);
+</script>
+
+</html>
