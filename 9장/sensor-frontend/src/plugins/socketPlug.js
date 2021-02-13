@@ -1,11 +1,8 @@
-// import Vue from 'vue';
-// import io from 'socket.io-client';
-// export default {
-//     install(Vue, {
-//         host
-//     }) {
-//         const socketClient = io(`${host}`);
-//         Vue.prototype.$socket = socketClient;
-//         console.log("complete")
-//     }
-// }
+import io from 'socket.io-client'; 
+export default {
+    install: (app, {host}) => {
+      const socketClient = io(`${host}`);
+      app.config.globalProperties.$socket = socketClient
+      app.provide('socket', socketClient)
+    }
+  }

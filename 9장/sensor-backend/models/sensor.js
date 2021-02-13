@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema 
-console.log(1)
 const sensorSchema = new Schema({ 
 	id: Number,
 	idx: Number,
@@ -9,5 +8,4 @@ const sensorSchema = new Schema({
     wv: Number, 
     humi : Number
 })
-
 module.exports = mongoose.model('Sensor', sensorSchema) 

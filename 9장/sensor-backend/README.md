@@ -1,6 +1,6 @@
 ## MongoDB를 mac에서 설치하는 법
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
-이후
+
 ## MongoDB 구동 명령어
 mongod --config /usr/local/etc/mongod.conf
 
@@ -16,9 +16,12 @@ cmd로 mongo, mongod를 하고 싶다면 환경변수 > 시스템변수 > PATH�
 3. 데이터베이스 확인 : `show dbs` 아직 sensor가 생성되지 않았습니다.
 4. 데이타베이스 생성 : db.sensor.insert({"kundol" : 1})
 5. 데이터베이스 확인 : `show dbs` sensor DB가 생성되었습니다! 
+6. 계정 생성 : 관리자계정 생성 이후 유저계정을 생성합니다.
+```
+use admin
+db.createUser({ user: "root" , pwd: "root123", roles: ["userAdminAnyDatabase"], mechanisms : ["SCRAM-SHA-1"]})  
 
-그 이후에 user를 추가합니다. 
-```shell
+use sensor
 db.createUser({  
  user:"dabin",
  pwd:"dabin12010",

@@ -10,7 +10,7 @@
     </nav>
     <div class="back" v-if="loading">
       <div class="background"></div>
-      <div class="alert vs-loading default">
+      <div class="vs-loading default">
         <div class="effect-1 effects"></div>
         <div class="effect-2 effects"></div>
         <div class="effect-3 effects"></div>
@@ -336,20 +336,6 @@
     }
   }
 
-  ul {
-    list-style-type: none;
-    margin: 0 auto;
-    padding: 0.6em 0 0 0;
-  }
-
-  li:hover {
-    cursor: pointer;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
 
   .vs-loading {
     position: relative;
@@ -406,6 +392,21 @@
     transition: all .3s ease;
     outline: none;
   }
+
+  ul {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0.6em 0 0 0;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  } 
 
   table {
     margin: 0 auto;
