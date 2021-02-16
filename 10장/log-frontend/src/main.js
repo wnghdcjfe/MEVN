@@ -2,11 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import store from './store'
 import socketPlugin from './plugins/socketPlug.js'  
-import {host} from './config'
-import VueSweetalert2 from 'vue-sweetalert2';
+import {host} from './config' 
 
-createApp(App)
-.use(VueSweetalert2)
+createApp(App) 
 .use(store)
 .use(socketPlugin, {host})
 .mount('#app')  

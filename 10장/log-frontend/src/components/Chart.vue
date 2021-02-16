@@ -46,8 +46,7 @@ computed, onMounted
         area = d3.area().curve(d3.curveMonotoneX).x(d => xScale(d.time)).y0(chartHeight).y1(d => yScale(d[key]))
         tooltip = d3.select(`.tooltip`)
       }
-      const initDraw = (data, key)=>  {
-        console.log("initdraw", data)
+      const initDraw = (data, key)=>  { 
         //data는 string형태로 오기 때문에 여기서 new Date 객체로 바꿔주어야 합니다.   
         data.forEach(d => d.time = new Date(d.time));
         const mn = d3.min(data, d => d[key])
@@ -124,13 +123,11 @@ computed, onMounted
           .attr("cx", d => xScale(d.time))
           .attr("cy", d => yScale(d[key]))
       }
-      onMounted(() => { 
-        console.log(chartType.value)
+      onMounted(() => {  
         setAreaAndScale(chartType.value);
         let flag = 0;
         store.subscribe((mutation) => {
-          if (mutation.type === "CHANGE_RESPONSE_CHART") {    
-              console.log("CHANGE_RESPONSE_CHART", resTimeList.value)
+          if (mutation.type === "CHANGE_RESPONSE_CHART") {     
               if (!flag) initDraw(resTimeList.value, chartType.value);
               else draw(resTimeList.value, chartType.value);
               flag = 1; 

@@ -8242,7 +8242,7 @@
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
 
-"sweetalert2@10.x":
+"sweetalert2@^10.15.0", "sweetalert2@10.x":
   "integrity" "sha512-zh/4URSGH1b2RrJuPHI9nzcKsg1qMuRCNkmgVILJ+sQavXQn5jRx+ocCUN15vdGi05oavwdbMaXg2qjgr9Lplw=="
   "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.15.0.tgz"
   "version" "10.15.0"
@@ -8766,13 +8766,6 @@
   dependencies:
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
-
-"vue-sweetalert2@^4.2.0":
-  "integrity" "sha512-6D7sNEWiUek8eNUl4oHJJvQPiXFVKGrtoJnUaturyVxBY7+MYQF1C7YEiktSp2UtatUPdObt+ozU5dN1TnvD4w=="
-  "resolved" "https://registry.npmjs.org/vue-sweetalert2/-/vue-sweetalert2-4.2.0.tgz"
-  "version" "4.2.0"
-  dependencies:
-    "sweetalert2" "10.x"
 
 "vue-template-es2015-compiler@^1.9.0":
   "integrity" "sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU="
