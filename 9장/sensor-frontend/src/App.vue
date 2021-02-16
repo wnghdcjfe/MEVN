@@ -53,6 +53,7 @@
           if (mutation.type === "CHANGE_SENSOR_CHART") {
             if (sensors.value.length === 10) loading.value = false
           } else if (mutation.type === "CLOSE_SERVICE") {
+            console.log("change the loading")
             loading.value = true
           }
         })

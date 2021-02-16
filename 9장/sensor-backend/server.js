@@ -9,7 +9,7 @@ const io = require('socket.io')(http, {
   }
 })
 const util = require('./util')()
-const sensorController = require('./controller/sensor')
+const sensorController = require('./controller/sensorController')
 const PORT = process.env.PORT || 12010
 const mongoose = require('mongoose')
 const USER = 'dabin'
@@ -29,7 +29,7 @@ const main = async () => {
     .catch((err) => console.error(err))
   mongoose.set('useFindAndModify', false)
  
-  const jsonArray = await util.readCSV() 
+  const jsonArray = await util.readCSV()
   const len = jsonArray.length
   io.on('connection', async (socket) => { 
     console.log(`User connected :: ${util.getDate()} ID : ${socket.id}`)
@@ -47,9 +47,10 @@ const main = async () => {
     idx = await sensorController.sendDataAndSaveDB(io, jsonArray, idx)
     console.log(`Send to user Current Sensor And Save DB :: ${util.getDate()} idx = ${idx} ${JSON.stringify(jsonArray[idx])}`) 
     idx += 1
-    if(idx === len){
-      clearInterval(timeInterval)
+    if(idx === len){ 
+      console.log(`Close sensor Service :: ${util.getDate()}`) 
       io.emit("closeSensorService", "byebye")
+      clearInterval(timeInterval) 
     } 
   }, constants.INTERVAL) 
   http.listen(PORT, () => console.log(`Start Sensor Server ::: http://127.0.0.1:${PORT} :: ${util.getDate()}`))
