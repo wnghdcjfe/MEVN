@@ -1,17 +1,15 @@
 <template>
-
   <div class="Map">
     <div class="d3 card"></div>
   </div>
 </template>
-
 <script>
   import {
     onMounted
   } from 'vue'
   import * as d3 from 'd3';
   import * as topojson from 'topojson-client';
-  // https://github.com/southkorea/southkorea-maps/tree/master/kostat/2018/json
+  // json파일의 출처 :  https://github.com/southkorea/southkorea-maps/tree/master/kostat/2018/json
   const koreaMap = require('./assets/skorea-provinces-2018-topo-simple.json');
   export default {
     name: 'App',
@@ -62,11 +60,10 @@
           }
         ]
         const airInfo = [{
-            "name": "비행기",
-            "lat": "38.132600",
-            "lon": "125.224612"
-          }
-        ]
+          "name": "비행기",
+          "lat": "38.132600",
+          "lon": "125.224612"
+        }]
 
         const icons = svg.append('g').selectAll('svg')
           .data(airInfo)
@@ -77,7 +74,7 @@
           .attr('x', d => projection([d.lon, d.lat])[0])
           .attr('y', d => projection([d.lon, d.lat])[1])
           .attr('opacity', 1)
-          .attr("xlink:href", require("./assets/airplane.png")) 
+          .attr("xlink:href", require("./assets/airplane.png"))
 
         const rect = svg.append('g').selectAll('rect')
           .data(mapInfo)
@@ -105,18 +102,18 @@
           .append("text")
           .text(d => d.number)
           .attr('x', d => projection([d.lon, d.lat])[0] - d.number.length * 2 + 15)
-          .attr('y', d => projection([d.lon, d.lat])[1] + 30) 
+          .attr('y', d => projection([d.lon, d.lat])[1] + 30)
           .attr('font-weight', "bold")
           .attr("fill", "#de481f")
- 
-  
+
+
 
         const zoomed = (e) => {
           mapArea.attr('transform', e.transform)
           text_name.attr("transform", e.transform)
           text_number.attr("transform", e.transform)
-          rect.attr("transform", e.transform) 
-          icons.attr("transform", e.transform)  
+          rect.attr("transform", e.transform)
+          icons.attr("transform", e.transform)
         }
         const zoom = d3.zoom().scaleExtent([1, 8]).on('zoom', zoomed)
         svg.call(zoom)
@@ -133,6 +130,7 @@
 
 <style>
   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
   .d3 {
     background: white;
     margin: 0 auto;

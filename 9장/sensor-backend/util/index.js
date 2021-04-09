@@ -1,6 +1,4 @@
 const csv = require('csvtojson')
-const path = require('path')
-const filePath = path.join(__dirname, '../data/data.csv')
 const form = date => ("00" + date).slice(-2) 
 const _ = require("fxjs/Strict")
 
@@ -13,7 +11,7 @@ const setType = data =>{
 }
 module.exports = () => {
     return {
-        async readCSV() {  
+        async readCSV(filePath) {  
             const ret = _.go(
                 await csv().fromFile(filePath),
                 _.map(setType),  

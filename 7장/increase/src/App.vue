@@ -16,7 +16,7 @@
     },
     setup() {
       const draw = () => {
-        const width = 500 - 20 // --- (1)
+        const width = 500 - 20 
         const height = 600 - 20
         const radius = Math.min(width, height) / 3
         const group = d3.select("svg")
@@ -25,12 +25,12 @@
           .append("g")
           .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
 
-        const pieGenerator = d3.pie().sort(null) // --- (2)
+        const pieGenerator = d3.pie().sort(null)  
         const arc = d3.arc()
-          .innerRadius(radius * 0.7)
+          .innerRadius(radius * 0.8)
           .outerRadius(radius)
 
-        const textDOM = group.append("text") // --- (3)
+        const textDOM = group.append("text")  
           .attr("text-anchor", "middle")
           .attr("dy", ".3em")
 
@@ -44,7 +44,7 @@
           .attr("class", (d, i) => `frontColor${i}`)
           .attr("d", arc)
 
-        const format = d3.format(".0%") // --- (3)
+        const format = d3.format(".0%") 
         function arcTween(pie) { // --- (4)
           return function (d) {
             const interpolate = d3.interpolate(pie[0].startAngle, pie[0].endAngle)
@@ -56,7 +56,7 @@
             }
           }
         }
-        // --- (5)
+         
         foreground.transition().duration(1500).attrTween("d", arcTween(pieGenerator([80, 20]))).delay(1000) // --- (7)
 
       }
@@ -71,9 +71,10 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100400&display=swap');
-
-
+@font-face {
+  font-family: overwatch;
+  src: url(https://us.battle.net/forums/static/fonts/f014015d/f014015d.woff);
+} 
   .Number path.backColor {
     fill: #ff9c00;
   }
@@ -91,6 +92,6 @@
     font-weight: 400;
     line-height: 16em;
     fill: black;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'overwatch', sans-serif; 
   }
 </style>

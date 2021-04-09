@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <title>D3기초 - circle과 axis</title>
-    <style> 
+    <style>
         svg {
             width: 100%;
             height: 500px;
@@ -72,18 +72,18 @@
         .range([margin.left, width - margin.right])
         .padding(0.5)
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.value)]).nice()
+        .domain([0, d3.max(data, d => d.value)])
         .range([height - margin.bottom, margin.top])
+        .nice()
 
     const xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
-        .call(d3.axisBottom(x)
-            .tickSizeOuter(0))
+        .call(d3.axisBottom(x).tickSizeOuter(0))
     const yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(y))
         .call(g => g.select(".domain").remove())
- 
+
     const svg = d3.select("svg")
     svg.append("g")
         .attr("fill", "#41B883")
@@ -95,14 +95,14 @@
             y(0) - y(d.value),
             [10, 10, 0, 0]
         ))
-        svg.append("g") 
+    svg.append("g")
         .selectAll("text").data(data).enter().append("text")
         .attr("y", d => y(d.value))
         .attr("x", d => x(d.name))
-        .attr("font-weight", "bold") 
+        .attr("font-weight", "bold")
         .text(d => d.value)
 
-        
+
     svg.append("g")
         .call(xAxis);
 

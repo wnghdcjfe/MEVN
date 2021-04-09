@@ -19,7 +19,7 @@
     <div>
       <h1>{{herestk}}</h1>
       <p class="message">{{message}}</p>
-      <p>{{name}} - 목표매도금액</p>
+      <p>{{name}} - 목표매수금액</p>
       <div class="target">
         <input v-model.number="targetCur" type="number" step="500">
         <button @click="setTarget()">설정</button>
@@ -59,7 +59,6 @@
     ref
   } from 'vue'
   import axios from 'axios'
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
   export default {
     name: 'App',
     components: {},
@@ -74,7 +73,7 @@
         d3.select("svg").selectAll("g").remove()
         const remain = ((now - Math.max(now - target, 0)) / now) * 100
         if (remain === 100) {
-          message.value = `지금 팔아야 합니다!`
+          message.value = `지금 사야 합니다!`
         } else if (remain >= 50) {
           message.value = `${Math.round(remain)}%에요 좀만 참으세요 ㅠㅠ`
         } else {
@@ -162,15 +161,13 @@
           })
 
         setInterval(() => {
-          axios.get("http://127.0.0.1:12010/stocks/today").then(res => {
-            console.log(1)
+          axios.get("http://127.0.0.1:12010/stocks/today").then(res => { 
             stock = res.data
             herestk.value = stock[name.value]
             draw(targetCur.value, herestk.value)
           })
         }, 1000 * 60);
-      })
-      console.log(2)
+      }) 
       return {
         loading,
         name,
