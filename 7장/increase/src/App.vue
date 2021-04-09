@@ -45,7 +45,7 @@
           .attr("d", arc)
 
         const format = d3.format(".0%") 
-        function arcTween(pie) { // --- (4)
+        function arcTween(pie) {  
           return function (d) {
             const interpolate = d3.interpolate(pie[0].startAngle, pie[0].endAngle)
             const interpolateText = d3.interpolate(0, pie[0].value)
