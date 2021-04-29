@@ -1,5 +1,3 @@
-'use strict'
-
 const morgan = require('morgan') 
 const logController = require('../controllers/logController') 
 const jsonFormat = (tokens, req, res) => {

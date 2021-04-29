@@ -73,7 +73,7 @@ computed, onMounted
           .attr("x2", 0).attr("y2", yScale(mx))
           .selectAll("stop")
           .data([
-            {offset: "0%", color: "white"}, 
+            {offset: "0%", color: "#eef9f4"},  
             {offset: "100%", color: "#4fc08d"}
           ])
           .enter().append("stop")
@@ -155,7 +155,7 @@ circle {
 
 .area {
   fill: url(#response-gradient); 
-  fill-opacity : 0.4;
+  fill-opacity : 0.3;
 }
 
 .tooltip {

@@ -1,4 +1,4 @@
-const express = require('express') // --- (1)
+const express = require('express') 
 const app = express()
 const cors = require('cors')
 const http = require("http").createServer(app)
@@ -9,10 +9,10 @@ const io = require('socket.io')(http, {
 })
 const path = require('path')
 const mongoose = require('mongoose')
-const util = require('./util')() // --- (2)
+const util = require('./util')() 
 const middleware = require('./middleware/logging.js')()
 const errorCode = require('./config').errorCode
-const specController = require('./controllers/specController.js') // --- (3)
+const specController = require('./controllers/specController.js')  
 const testController = require('./controllers/testController.js')
 const logController = require('./controllers/logController.js')
 const ErrorLogController = require('./controllers/ErrorLogController.js')
@@ -25,31 +25,30 @@ const {
   HOST,
   DB
 } = require('./config')
-const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}`
-
+const mongodbURL = `mongodb://${USER}:${PWD}@${HOST}/${DB}` 
 const main = async () => {
   // MongoDB connect 설정   
   await mongoose.connect(mongodbURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
-    }) // --- (4)
-    .then(() => console.log('connection succesful'))
+    }) 
+    .then(() => console.log(`MongoDB connected ${util.getDate()} `)) 
     .catch((err) => console.error(err))
   mongoose.set('useFindAndModify', false)
 
-  io.on('connection', async (socket) => { // --- (5)
+  io.on('connection', async (socket) => {  
     console.log(`User connected :: ${util.getDate()} ID : ${socket.id}`)
   })
 
   //app 객체 설정 
-  app.use('/', express.static(path_dist)) // --- (6)
+  app.use('/', express.static(path_dist))  
   app.use(cors())
   app.use(middleware.morganLog())
   app.get('/test', testController.sendComment)
   app.get('/test_request', testController.testing)
 
   // 애러핸들러
-  app.use((error, req, res, next) => { // --- (7)
+  app.use((error, req, res, next) => { 
     console.log(`${util.getDate()} :: Error ${error}`)
     const message = error.message.replace(/"|\\/g, '')
     const founded = errorCode.find(e => e.name.test(message))
@@ -68,10 +67,10 @@ const main = async () => {
 
 
   // 5초마다
-  setInterval(async () => { // --- (8)
+  setInterval(async () => { 
     testController.reqPer5()
     const spec = await specController.getSpec()
-    const log = await logController.getResTimeLatest('/test', 10) // 50초이후에 하면 됩니다.
+    const log = await logController.getResTimeLatest('/test', 10) 
     console.log(spec, log)
     io.emit("spec", spec)
     io.emit("log", log)

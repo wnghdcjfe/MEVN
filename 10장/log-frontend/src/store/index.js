@@ -25,9 +25,9 @@ export default createStore({
             const ret = await service.get('/test_request')
             // 애러가 만약 발생이 되었다면 ret에는 null이 할당되게 되며 그 아래에 있는 로직은 실행되지 않게 하는 코드입니다.  
             console.log("ret", ret)
-            if(!ret) return;  
-            // 올바른 데이터의 경우 ret {올바른: "데이타"} 이런 식의 로그가 나타나게 됩니다. 
+            if(!ret) return;   
             console.log('애러가 발생되지 않았고 아래에 있는 로직이 실행됩니다.')
+            // 비즈니스 로직을 아래에 두면 되겠죠?
         }
     }, 
     getters: {

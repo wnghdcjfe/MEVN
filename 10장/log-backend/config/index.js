@@ -3,7 +3,7 @@ module.exports = {
     USER : 'dabin', 
     PWD : 'dabin12010', 
     HOST : 'localhost:27017',  
-    DB : 'sensors', 
+    DB : 'log', 
     errorCode:[
         {
             "name" : new RegExp("Unexpected end of JSON input"), 
