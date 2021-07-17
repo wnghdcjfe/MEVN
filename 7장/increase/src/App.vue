@@ -16,21 +16,22 @@
     },
     setup() {
       const draw = () => {
-        const width = 500 - 20 
+        const width = 500 - 20
         const height = 600 - 20
         const radius = Math.min(width, height) / 3
+        const tOption = `translate(${width/2},${height/2})`
         const group = d3.select("svg")
           .attr("width", width)
           .attr("height", height)
           .append("g")
-          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+          .attr("transform", tOption)
 
-        const pieGenerator = d3.pie().sort(null)  
+        const pieGenerator = d3.pie().sort(null)
         const arc = d3.arc()
           .innerRadius(radius * 0.8)
           .outerRadius(radius)
 
-        const textDOM = group.append("text")  
+        const textDOM = group.append("text")
           .attr("text-anchor", "middle")
           .attr("dy", ".3em")
 
@@ -44,11 +45,15 @@
           .attr("class", (d, i) => `frontColor${i}`)
           .attr("d", arc)
 
-        const format = d3.format(".0%") 
-        function arcTween(pie) {  
+        const format = d3.format(".0%")
+
+        function arcTween(pie) {
           return function (d) {
-            const interpolate = d3.interpolate(pie[0].startAngle, pie[0].endAngle)
-            const interpolateText = d3.interpolate(0, pie[0].value)
+            const start = pie[0].startAngle
+            const end = pie[0].endAngle
+            const value = pie[0].value
+            const interpolate = d3.interpolate(start, end)
+            const interpolateText = d3.interpolate(0, value)
             return function (t) {
               d.endAngle = interpolate(t)
               textDOM.text(format(interpolateText(t) / 100))
@@ -56,8 +61,11 @@
             }
           }
         }
-         
-        foreground.transition().duration(1500).attrTween("d", arcTween(pieGenerator([80, 20]))).delay(1000) // --- (7)
+
+        foreground.transition()
+          .duration(1500)
+          .attrTween("d", arcTween(pieGenerator([80, 20])))
+          .delay(1000)
 
       }
       onMounted(() => {
@@ -71,10 +79,11 @@
 </script>
 
 <style>
-@font-face {
-  font-family: overwatch;
-  src: url(https://us.battle.net/forums/static/fonts/f014015d/f014015d.woff);
-} 
+  @font-face {
+    font-family: overwatch;
+    src: url(https://us.battle.net/forums/static/fonts/f014015d/f014015d.woff);
+  }
+
   .Number path.backColor {
     fill: #ff9c00;
   }
@@ -92,6 +101,6 @@
     font-weight: 400;
     line-height: 16em;
     fill: black;
-    font-family: 'overwatch', sans-serif; 
+    font-family: 'overwatch', sans-serif;
   }
 </style>

@@ -4,7 +4,7 @@
 
 <script>
   import ImgSlider from './components/ImgSlider'
-
+  const BASE = `http://127.0.0.1:12010/img/`
   export default {
     name: 'App',
     components: {
@@ -13,18 +13,18 @@
     setup() {
       const option = {
         list: [{
-            "src": 'http://127.0.0.1:12010/img/1.jpg',
-            "name": "내가 만든 소시지 오므라이스",
+            "src": `${BASE}/1.jpg`,
+            "name": "노을이 지고 난 후의 고성",
             "id": 1
           },
           {
-            "src": 'http://127.0.0.1:12010/img/2.jpg',
-            "name": "혼자 호텔가서 먹은 브런치",
+            "src": `${BASE}/2.jpg`,
+            "name": "힘들어지쳐 쓰러진 나.",
             "id": 2
           },
           {
-            "src": 'http://127.0.0.1:12010/img/3.jpg',
-            "name": "이태원에서 먹은 분짜",
+            "src": `${BASE}/3.jpg`,
+            "name": "카페에서 행복한 나",
             "id": 3
           }
         ],
@@ -39,10 +39,14 @@
 </script>
 
 <style>
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'MaruBuri-Regular'; 
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
