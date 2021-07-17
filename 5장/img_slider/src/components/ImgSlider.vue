@@ -122,8 +122,9 @@
         box-shadow: inset 0 1px 1px 0px rgb(0 0 0 / 60%), 0px 1px 1px 0px white;
     }
 
-    .dot>span:hover, .dot>span.active {
+    .dot>span:hover,
+    .dot>span.active {
         cursor: pointer;
         background-color: #717171;
-    } 
+    }
 </style>
