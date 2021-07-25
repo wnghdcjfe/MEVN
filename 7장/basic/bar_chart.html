@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>D3기초 - circle과 axis</title>
     <style>
         svg {
@@ -26,14 +26,14 @@
             Math.min(r[1], height, width),
             Math.min(r[2], height, width),
             Math.min(r[3], height, width)
-        ];
+        ]
 
         return `M${x + r[0]},${y
             }h${width - r[0] - r[1]}${arc(r[1], [1, 1, 1, 1])
             }v${height - r[1] - r[2]}${arc(r[2], [1, 1, -1, 1])
             }h${-width + r[2] + r[3]}${arc(r[3], [1, 1, -1, -1])
             }v${-height + r[3] + r[0]}${arc(r[0], [1, 1, 1, -1])
-            }z`;
+            }z`
     }
 
     const margin = {
@@ -104,10 +104,10 @@
 
 
     svg.append("g")
-        .call(xAxis);
+        .call(xAxis)
 
     svg.append("g")
-        .call(yAxis);
+        .call(yAxis)
 </script>
 
 </html>

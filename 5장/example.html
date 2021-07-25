@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>Vue.js 디렉티브와 바인딩</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .e {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .e .i {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 84.5%;
+            border: 1px solid #f79d8b;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        .e .t {
+            color: #f79d8b;
+            bottom: 28px;
+            position: relative;
+        }
+
+        h2 {
+            color: #f79d8b;
+            height: 28px; 
+        }
+        p{
+            height: 20px;  
+        }
+
+        .i>img {
+            width: 100%;
+        }
+
+        svg {
+            position: relative;
+            fill: #f79d8b;
+            stroke: white;
+            top: -1px;
+        }
+
+        .m {
+            width: 100%;
+            text-align: center;
+        }
+
+        .txt:focus {
+            outline: none;
+        }
+
+        .txt {
+            display: block;
+            width: 20%;
+            margin: 5px auto;
+            text-align: center;
+            border: 1px solid #f79d8b;
+            border-radius: 5px;
+            color: #f79d8b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="m" id="MEVN"> 
+        <p><span v-show="flag">{{book_name}}</span> </p>
+        <h2>{{txt}}</h2>
+        <input type="text" v-model="txt" class="txt">
+        <div class="e" v-for="(e, idx) in list" :key="idx">
+            <div class="i">
+                <img :src="e.img" alt="">
+            </div>
+            <svg viewBox="0 0 93.3 100" class="">
+                <path d="M52.1 5.4l-5.4 5.4-5.4-5.4L46.6 0l5.5 5.4z"></path>
+            </svg>
+            <div class="t">{{e.msg}}</div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const main = {
+        data() {
+            return {
+                list: [{
+                        "img": "https://wnghdcjfe.github.io/1.png",
+                        "msg": "박종선. 똑똑하군."
+                    },
+                    {
+                        "img": "https://wnghdcjfe.github.io/2.png",
+                        "msg": "재혁아 5학년 축하한다."
+                    },
+                    {
+                        "img": "https://wnghdcjfe.github.io/3.png",
+                        "msg": "실장님 감사했습니다."
+                    },
+                    {
+                        "img": "https://wnghdcjfe.github.io/4.png",
+                        "msg": "책1권정도는.. 팔리겠지?"
+                    },
+                ],
+                txt: "절찬판매중!", 
+                book_name : "실시간 모니터링 시스템을 만들며 정복하는 MEVN", 
+                flag: 1
+            }
+        }, 
+        methods:{
+            toggle(){
+                this.flag ^= 1
+            }
+
+        }, 
+        mounted(){
+            setInterval(() => {
+                this.toggle()
+            }, 1000);
+        }
+    }
+    const app = Vue.createApp(main)
+    app.mount('#MEVN')
+</script>
+
+</html>

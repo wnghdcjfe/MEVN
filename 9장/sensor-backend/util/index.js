@@ -4,8 +4,7 @@ const _ = require("fxjs/Strict")
 
 const setType = data =>{
     for(let key in data){
-        if(key == 'time')data[key] = new Date(data[key])
-        else data[key] = Number(data[key])
+        key === 'time' ? data[key] = new Date(data[key]) : data[key] = Number(data[key]) 
     } 
     return data  
 }

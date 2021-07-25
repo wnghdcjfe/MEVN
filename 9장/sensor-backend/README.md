@@ -1,4 +1,4 @@
-## MongoDB를 mac에서 설치하는 법
+## MongoDB를 MacOS에서 설치하는 법
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ## MongoDB 구동 명령어

@@ -53,7 +53,7 @@
   </article>
 </template>
 <script>
-  import * as d3 from 'd3';
+  import * as d3 from 'd3'
   import {
     onMounted,
     ref
@@ -79,9 +79,9 @@
         } else {
           message.value = `${Math.round(remain)}%입니다. 장기적으로 바라보죠.`
         }
-        const width = 350;
-        const height = 350;
-        const radius = Math.min(width, height) / 2.3;
+        const width = 350
+        const height = 350
+        const radius = Math.min(width, height) / 2.3
         const group = d3.select("svg")
           .attr("width", width)
           .attr("height", height)
@@ -151,8 +151,10 @@
         draw(targetCur.value, herestk.value)
       }
       onMounted(() => {
-        Promise.all([axios.get("http://127.0.0.1:12010/stocks/today"), axios.get(
-            "http://127.0.0.1:12010/stocks/days")])
+        Promise.all([
+            axios.get("http://127.0.0.1:12010/stocks/today"),
+            axios.get("http://127.0.0.1:12010/stocks/days")
+          ])
           .then(res => {
             loading.value = false
             stock = res[0].data
@@ -161,13 +163,13 @@
           })
 
         setInterval(() => {
-          axios.get("http://127.0.0.1:12010/stocks/today").then(res => { 
+          axios.get("http://127.0.0.1:12010/stocks/today").then(res => {
             stock = res.data
             herestk.value = stock[name.value]
             draw(targetCur.value, herestk.value)
           })
-        }, 1000 * 60);
-      }) 
+        }, 1000 * 60)
+      })
       return {
         loading,
         name,
@@ -403,7 +405,7 @@
   li {
     display: inline-block;
     margin: 0 10px;
-  } 
+  }
 
   table {
     margin: 0 auto;

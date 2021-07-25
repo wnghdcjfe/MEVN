@@ -7,44 +7,44 @@
   import {
     onMounted
   } from 'vue'
-  import * as d3 from 'd3';
-  import * as topojson from 'topojson-client';
+  import * as d3 from 'd3'
+  import * as topojson from 'topojson-client'
   // json파일의 출처 :  https://github.com/southkorea/southkorea-maps/tree/master/kostat/2018/json
-  const koreaMap = require('./assets/skorea-provinces-2018-topo-simple.json');
+  const koreaMap = require('./assets/skorea-provinces-2018-topo-simple.json')
   export default {
     name: 'App',
     components: {},
     setup() {
       const draw = () => {
-        const map = topojson.feature(koreaMap, koreaMap.objects.skorea_provinces_2018_geo);
+        const map = topojson.feature(koreaMap, koreaMap.objects.skorea_provinces_2018_geo)
 
-        const width = 500;
-        const height = 500;
+        const width = 500
+        const height = 500
         const svg = d3
           .select('.d3')
           .append('svg')
           .attr('width', width).attr('height', height);
 
-        const projection = d3.geoMercator()
-          .scale(1)
-          .translate([0, 0]);
+const projection = d3.geoMercator()
+.scale(1)
+.translate([0, 0])
 
-        const path = d3.geoPath().projection(projection);
-        const bounds = path.bounds(map);
+        const path = d3.geoPath().projection(projection)
+        const bounds = path.bounds(map)
 
-        const widthScale = (bounds[1][0] - bounds[0][0]) / width;
-        const heightScale = (bounds[1][1] - bounds[0][1]) / height;
-        const scale = 1 / Math.max(widthScale, heightScale);
+        const widthScale = (bounds[1][0] - bounds[0][0]) / width
+        const heightScale = (bounds[1][1] - bounds[0][1]) / height
+        const scale = 1 / Math.max(widthScale, heightScale)
 
-        const xoffset = width / 2 - scale * (bounds[1][0] + bounds[0][0]) / 2 + 10;
-        const yoffset = height / 2 - scale * (bounds[1][1] + bounds[0][1]) / 2 + 80;
-        const offset = [xoffset, yoffset];
-        projection.scale(scale).translate(offset);
+        const xoffset = width / 2 - scale * (bounds[1][0] + bounds[0][0]) / 2 + 10
+        const yoffset = height / 2 - scale * (bounds[1][1] + bounds[0][1]) / 2 + 80
+        const offset = [xoffset, yoffset]
+        projection.scale(scale).translate(offset)
 
         const mapArea = svg.append('g')
           .selectAll('path').data(map.features)
           .enter().append('path')
-          .attr('d', path);
+          .attr('d', path)
 
         const mapInfo = [{
             "name": "서울",
