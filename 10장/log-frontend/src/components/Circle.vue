@@ -9,7 +9,7 @@
   import store from '../store'
   import {
     computed,
-    onMounted,  
+    onMounted,
   } from 'vue'
   import {
     circleWidth,
@@ -39,10 +39,8 @@
     },
     setup(props) {
       let svg, arc, foreground, textDOM
-
-      const specLog = computed(() => store.getters['specLog']) 
-      const circleType = computed(() => props.type)  
-      // const name =  computed(() => props.name)       
+      const specLog = computed(() => store.getters['specLog'])
+      const circleType = computed(() => props.type)
 
       const setAreaAndScale = (key) => {
         const radius = Math.min(circleWidth, circleHeight) / 2.5;
@@ -70,11 +68,13 @@
       //draw에서는 데이터 처리가 아닌 data를 통해서 차트틀 그리는 것에 대해 집중해야 한다. 
       const draw = (data, key) => {
         data = data[key];
-        foreground.transition().duration(500).attrTween("d", arcTween(pieGenerator([data, 100 - data]), arc, textDOM))
+        foreground.transition()
+          .duration(500)
+          .attrTween("d", arcTween(pieGenerator([data, 100 - data]), arc, textDOM))
           .delay(1000)
       }
       onMounted(() => {
-        setAreaAndScale(circleType.value); 
+        setAreaAndScale(circleType.value);
         store.subscribe((mutation) => {
           if (mutation.type === "CHANGE_SPEC") {
             draw(specLog.value, circleType.value);
@@ -82,7 +82,8 @@
         })
       })
       return {
-        circleType,specLog 
+        circleType,
+        specLog
       }
     }
   }
