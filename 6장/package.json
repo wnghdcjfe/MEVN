@@ -11,6 +11,6 @@
   "dependencies": {
     "csvtojson": "^2.0.10",
     "mongodb": "^3.3.5",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.13.15"
   }
 }
